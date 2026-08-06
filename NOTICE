@@ -1,0 +1,19 @@
+NOTICE
+
+undergrad-physics-skill v0.3
+Copyright (c) 2026 undergrad-physics-skill contributors
+
+This project is an original implementation. It was written with AI
+assistance and reviewed with automated QA. Its structure and methodology
+were inspired by the following public projects, without copying their
+source text:
+
+- Math.Skill: https://github.com/Wholiver/Math.Skill (MIT)
+- landau-mode: https://github.com/shaevitz/landau-mode (MIT)
+- ScienceClaw physics-solver: https://github.com/beita6969/ScienceClaw (MIT)
+- xiaozhi-skills: https://github.com/qizhitang/xiaozhi-skills (MIT)
+- Agent Almanac: https://github.com/pjt222/agent-almanac (MIT)
+- Electromagnetism (LobeHub): https://lobehub.com/skills/tibsfox-gsd-skill-creator-electromagnetism
+
+If any third-party code or text is incorporated in future releases, the
+original copyright notices will be retained.
