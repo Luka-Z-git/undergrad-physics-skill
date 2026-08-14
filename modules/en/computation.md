@@ -33,7 +33,7 @@ m, g, l = sp.symbols('m g l', positive=True)
 L = sp.Rational(1,2)*m*l**2*q.diff(t)**2 + m*g*l*sp.cos(q)   # pendulum L
 EL = sp.simplify(sp.diff(sp.diff(L, q.diff(t), t) - sp.diff(L, q)))
 print(sp.Eq(EL, 0))
-# → -m*l**2*Derivative(q(t),(t,2)) - g*l*m*sin(q(t)) = 0  ✓
+# → -m*l**2*Derivative(q(t),(t,2)) - g*l*m*sin(q(t)) = 0  OK
 ```
 
 **Example B — RC discharge**:
@@ -45,7 +45,7 @@ V = sp.Function('V')(t)
 ode = sp.Eq(V.diff(t) + V/(R*C), 0)
 sol = sp.dsolve(ode, V, ics={V.subs(t, 0): V0})
 print(sol)
-# → Eq(V(t), V0*exp(-t/(C*R)))  ✓
+# → Eq(V(t), V0*exp(-t/(C*R)))  OK
 ```
 
 ---
@@ -100,7 +100,7 @@ x = sp.symbols('x')
 hbar = sp.symbols('hbar', positive=True)
 f = sp.Function('f')(x)
 comm = x*(-hbar*sp.I*sp.diff(f,x)) - (-hbar*sp.I)*sp.diff(x*f, x)
-print(sp.simplify(comm))  # I*ħ·f(x)  ✓
+print(sp.simplify(comm))  # I*ħ·f(x)  OK
 ```
 
 ---

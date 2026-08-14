@@ -23,7 +23,7 @@ import sys
 REQUIRED_SECTIONS = ["题意与图景", "建模", "推导", "验算", "答案", "易错点"]
 
 # Overleaf 不兼容符号（对勾/叉号/常见 emoji 区段）
-BANNED_CHARS = "✓✔✗✘❌⭕🟢🟡🔴"
+BANNED_CHARS = "\u2713\u2714\u2717\u2718\u274c\u2b55\U0001f7e2\U0001f7e1\U0001f534"  # check/cross/status symbols
 EMOJI_RE = re.compile(
     "[\U0001F000-\U0001FAFF\U00002600-\U000027BF\U0001F1E6-\U0001F1FF]"
 )

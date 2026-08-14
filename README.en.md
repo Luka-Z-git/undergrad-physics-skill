@@ -118,8 +118,8 @@ undergrad-physics-skill/
 
 Dual-licensed: scripts (e.g. `tests/validate_structure.py`) are MIT (see
 [LICENSE](LICENSE)); module text, examples, and tests are
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See
-[NOTICE](NOTICE).
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (see
+[LICENSE-CC-BY](LICENSE-CC-BY)). See [NOTICE](NOTICE).
 
 ## Originality
 

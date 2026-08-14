@@ -79,6 +79,7 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 | 错误预防 | `modules/error_prevention.md` | 跨域错误检查清单与陷阱表 |
 | 输出模板 | `modules/output_templates.md` | 标准解答/仅答案/解答检查模板与硬规则 |
 | 符号计算 | `modules/computation.md` | 可选 SymPy/SciPy 复核配方（无依赖降级友好） |
+| 英文模块 | `modules/en/` 与 `SKILL.en.md` | 与中文版等价的英文翻译，规则与中文版一致 |
 | 示例 | `examples/` | 完整带验证的例题 |
 | 测试 | `tests/` | 用例断言（TC-XXX-NNN） |
 

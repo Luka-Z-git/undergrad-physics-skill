@@ -27,7 +27,7 @@ English version: [README.en.md](README.en.md)
 
 ```
 undergrad-physics-skill/
-├── SKILL.md                      # ★ 主干：定位、工作流、验证摘要、模块索引
+├── SKILL.md                      # 主干：定位、工作流、验证摘要、模块索引
 ├── SKILL.en.md                   # English trunk
 ├── modules/
 │   ├── mechanics.md              # 理论力学领域协议
@@ -61,7 +61,7 @@ undergrad-physics-skill/
 
 ## 许可
 
-双许可：脚本（如 `tests/validate_structure.py`）为 MIT License（见 [LICENSE](LICENSE)）；模块、例题与测试的文本为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。详见 [NOTICE](NOTICE)。
+双许可：脚本（如 `tests/validate_structure.py`）为 MIT License（见 [LICENSE](LICENSE)）；模块、例题与测试的文本为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)（见 [LICENSE-CC-BY](LICENSE-CC-BY)）。详见 [NOTICE](NOTICE)。
 
 ## 致谢 (Credits)
 

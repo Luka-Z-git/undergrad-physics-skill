@@ -26,4 +26,5 @@ original copyright notices will be retained.
 
 - Scripts (e.g. `tests/validate_structure.py`): MIT License — see [LICENSE](LICENSE).
 - Prose content (module text, examples, tests, and documentation): [Creative
-  Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
+  Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/),
+  full notice in [LICENSE-CC-BY](LICENSE-CC-BY).
