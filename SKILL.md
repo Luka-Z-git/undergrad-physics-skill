@@ -1,6 +1,6 @@
 ---
 name: undergrad-physics-skill
-description: Solve undergraduate physics problems in mechanics, electromagnetism, and basic quantum mechanics with step-by-step derivations and built-in verification. Use when the user asks to derive equations of motion, analyze forces/fields/circuits, solve stationary Schrödinger or operator problems, check dimensions/conservation/limits/approximations, verify a physics derivation, or diagnose a student's attempted solution.
+description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): step-by-step derivations with mandatory F/L/B/C verification before final answers. Use when deriving equations of motion, solving field/circuit/Schrödinger problems, verifying a derivation, or diagnosing a student's attempted solution.
 ---
 
 # undergrad-physics-skill
@@ -25,15 +25,15 @@ description: Solve undergraduate physics problems in mechanics, electromagnetism
 - 研究生方向课：量子场论、广义相对论、群论、多体理论、宇宙学等。
 - 科研工作流：论文复现、arXiv 阅读、多智能体研究流水线。
 - 纯实验课内容、计算物理编程任务。
-- 只做推导审查不做从头解题的模式（本技能从零解题；若用户要求独立复核，按 `modules/review_engine.md` 在作答前执行）。
+- 模式分流：默认从零完整解题（模板 A）；用户提交作答求查时进入模板 C/E，不自动展开完整答案；高置信度复核按 `modules/review_engine.md` 执行。仅做独立审查而不解题也不诊断的工作流不在范围。
 
 ## 核心工作流
 
-对每个问题按以下顺序执行，不得跳步；每步未达到完成判据不得进入下一步。
+对每个问题按以下顺序执行；每步达到完成判据后才进入下一步。
 
-1. **解析（Parse）**：提取物理系统——对象、自由度、约束、坐标系、单位制、初始/边界条件、已知量与待求量；列出隐式条件（如分母非零、能量实性、参数范围）。完成判据：以上各项全部显式列出，无未声明的参数或条件。
+1. **解析（Parse）**：提取物理系统——对象、自由度、约束、坐标系、单位制、初始/边界条件、已知量与待求量；列出隐式条件（如分母非零、能量实性、参数范围）；若 `examples/` 有对应题型示例，先读取其模板结构与验证风格（仅作格式参考，不照抄答案）。完成判据：以上各项全部显式列出，无未声明的参数或条件。
 2. **建模（Model）**：选择方程体系（牛顿/拉格朗日/哈密顿/麦克斯韦/薛定谔），说明选择理由；写出拉格朗日量、哈密顿量或方程组的显式形式；确认每个被引用定理/定律的适用条件。完成判据：方程体系、显式表达式、适用条件三者齐备。
-3. **推导（Derive）**：分步推导，每步注明依据；先以符号推导、最后代入数值；每 3–5 步做一次 sanity check（数值或量纲）；矩阵、特征值、矩阵幂、递推等线性代数子问题可调用 Math.Skill 并注明借用了哪些结果；无 Math.Skill 时按 J 一致性手算。完成判据：每步有依据且可独立核验，符号推导在数值代入前完成。
+3. **推导（Derive）**：分步推导，每步注明依据；先以符号推导、最后代入数值；每 3–5 步至少执行一次 F 量纲或 E 数值抽样并内联记录结果；矩阵、特征值、矩阵幂、递推等线性代数子问题可调用 Math.Skill 并注明借用了哪些结果；无 Math.Skill 时按 J 一致性手算。完成判据：每步有依据且可独立核验，符号推导在数值代入前完成。
 4. **验证（Verify）**：标准解答必查 F 量纲、L 极限/特例、B 回代、C 守恒量（适用时），按题型补充可选加分项；逐条给出 PASS/FAIL；失败则进入回溯修正协议。完成判据：验证门禁通过——四项必查全部 PASS 或 N/A（原因），FAIL 0 项。
 5. **复核（Review，可选）**：用户要求高置信度或题目复杂时，按 `modules/review_engine.md` 做独立复核并附复核结论；不要求时跳过。完成判据：触发时 P1–P5 全部 PASS，或白纸重推后 FAIL 0 项。
 6. **作答（Answer）**：先执行所选模板的结构门禁（默认模板 A 六节，见 `modules/output_templates.md`）；再给出最终答案（加粗、含单位与适用条件），附一行验算摘要；列出本题真实易错点（无则不写）。完成判据：所选模板结构门禁通过，答案加粗、验算摘要与格式规则全部满足。
@@ -47,14 +47,7 @@ description: Solve undergraduate physics problems in mechanics, electromagnetism
 
 ## 验证引擎（摘要）
 
-完整定义见 `modules/verification_engine.md`。方法：**F** 量纲 / **D** 定义域参数域 / **B** 回代 / **C** 守恒量 / **L** 极限特例 / **E** 数值抽样 / **I** 独立方法 / **J** 一致性（矩阵/归一化/对易）。
-
-硬性规则：
-
-- 标准解答（模板 A）必查 **① F 量纲、② L 极限/特例、③ B 回代、④ C 守恒量（适用时）**；⑤ E 数值抽样、⑥ I 独立方法为可选加分项。
-- 任何验证 FAIL 必须回退到最后一个通过的中间结果，修正后从该点重推并重验。
-- **禁止伪造验证通过**：PASS 必须来自实际执行的计算。
-- 两次修正后仍失败 → 换独立方法；仍失败 → 明确声明无法给出已验证答案，不输出猜测。
+标准解答必查 **① F 量纲、② L 极限/特例、③ B 回代、④ C 守恒量（适用时）**；任何 FAIL 回退到最后一个通过的中间结果并从该点重推；禁止伪造 PASS（PASS = 实际执行的检查 + 可复核步骤）。完整方法、题型选择表与回溯协议见 `modules/verification_engine.md`。
 
 ## 输出规则
 

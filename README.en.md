@@ -16,7 +16,8 @@ mechanics (v0.4).
 - **Built-in verification**: 8 methods (F dimensional analysis / D domain /
   B back-substitution / C conservation / L limiting cases / E numerical
   sampling / I independent method / J consistency). Template A requires
-  F, L, B, and C (when applicable); failures trigger the backtrack protocol.
+  F, L, B, and C (when applicable); each PASS must include a re-checkable
+  step; failures trigger the backtrack protocol.
 - **Chinese + LaTeX**: display formulas use `$$ ... $$`; output can be
   pasted into Overleaf; no emoji or Overleaf-incompatible characters.
 - **Optional enhancements**: Math.Skill for linear algebra, and
@@ -75,7 +76,8 @@ workflows, lab-only content, and computational physics programming.
 Hard rules: Template A requires F, L, B, and C (when applicable); any FAIL
 triggers the backtrack protocol; fake PASS is forbidden; after two failed
 corrections, switch to an independent route or explicitly state that no
-verified answer can be given.
+verified answer can be given. The authoritative definitions live in
+`modules/verification_engine.md`.
 
 ## Repository Layout
 
