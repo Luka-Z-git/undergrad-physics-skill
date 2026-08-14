@@ -9,3 +9,6 @@ Thumbs.db
 
 # Local notes (not part of the skill)
 *.local.md
+
+# Workspace memory (assistant-local, not shipped)
+.workbuddy/

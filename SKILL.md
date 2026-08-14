@@ -1,6 +1,7 @@
 ---
 name: undergrad-physics-skill
-description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): step-by-step derivations with mandatory F/L/B/C verification before final answers. Use when deriving equations of motion, solving field/circuit/Schrödinger problems, verifying a derivation, or diagnosing a student's attempted solution.
+version: 0.5.2
+description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): step-by-step derivations with mandatory F/L/B/C verification before final answers. Use when deriving equations of motion, solving field/circuit/Schrödinger problems, verifying a derivation, or diagnosing a student's attempted solution. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
 ---
 
 # undergrad-physics-skill
@@ -15,8 +16,8 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 
 ## 适用范围
 
-- **理论力学**：牛顿力学、拉格朗日力学、哈密顿力学、运动微分方程、守恒量、小振动与简正模式、约束系统、非惯性系。
-- **电磁学**：静电场、静磁场、矢量分析（梯度/散度/旋度）、电势与场强、电容/电感、电路（RC/RL/RLC）、麦克斯韦方程组的基础应用。
+- **理论力学**：牛顿力学、拉格朗日力学、哈密顿力学、运动微分方程、守恒量、小振动与简正模式、约束系统、刚体基础（平面运动/纯滚动/碰撞）、非惯性系。
+- **电磁学**：静电场、静磁场（真空为主；线性介质仅限边界条件层面，不涉及介质极化/磁化推导）、矢量分析（梯度/散度/旋度）、电势与场强、电容/电感、电路（RC/RL/RLC）、麦克斯韦方程组的基础应用。
 - **基础量子力学**：定态薛定谔方程、一维势阱/势垒、谐振子、角动量与算符、对易关系、氢原子能级的入门推导。
 
 ## 范围外
@@ -25,15 +26,15 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 - 研究生方向课：量子场论、广义相对论、群论、多体理论、宇宙学等。
 - 科研工作流：论文复现、arXiv 阅读、多智能体研究流水线。
 - 纯实验课内容、计算物理编程任务。
-- 模式分流：默认从零完整解题（模板 A）；用户提交作答求查时进入模板 C/E，不自动展开完整答案；高置信度复核按 `modules/review_engine.md` 执行。仅做独立审查而不解题也不诊断的工作流不在范围。
+- 仅做独立审查而不解题也不诊断的工作流不在范围。
 
 ## 核心工作流
 
 对每个问题按以下顺序执行；每步达到完成判据后才进入下一步。
 
-1. **解析（Parse）**：提取物理系统——对象、自由度、约束、坐标系、单位制、初始/边界条件、已知量与待求量；列出隐式条件（如分母非零、能量实性、参数范围）；若 `examples/` 有对应题型示例，先读取其模板结构与验证风格（仅作格式参考，不照抄答案）。完成判据：以上各项全部显式列出，无未声明的参数或条件。
+1. **解析（Parse）**：提取物理系统——对象、自由度、约束、坐标系、单位制、初始/边界条件、已知量与待求量；列出隐式条件（如分母非零、能量实性、参数范围）；若 `examples/` 有对应题型示例，先读取其模板结构与验证风格（仅作格式参考，不照抄答案）。**条件不足或表述有歧义时**：缺关键参数优先向用户提问澄清；可作合理假设时显式声明假设后继续，禁止编造题目未给定的数值。完成判据：以上各项全部显式列出，无未声明的参数或条件。
 2. **建模（Model）**：选择方程体系（牛顿/拉格朗日/哈密顿/麦克斯韦/薛定谔），说明选择理由；写出拉格朗日量、哈密顿量或方程组的显式形式；确认每个被引用定理/定律的适用条件。完成判据：方程体系、显式表达式、适用条件三者齐备。
-3. **推导（Derive）**：分步推导，每步注明依据；先以符号推导、最后代入数值；每 3–5 步至少执行一次 F 量纲或 E 数值抽样并内联记录结果；矩阵、特征值、矩阵幂、递推等线性代数子问题可调用 Math.Skill 并注明借用了哪些结果；无 Math.Skill 时按 J 一致性手算。完成判据：每步有依据且可独立核验，符号推导在数值代入前完成。
+3. **推导（Derive）**：分步推导，每步注明依据；先以符号推导、最后代入数值；每 3–5 步至少执行一次 F 量纲或 E 数值抽样并内联记录结果；矩阵、特征值、矩阵幂、递推等线性代数子问题可调用 Math.Skill 并注明借用了哪些结果（Math.Skill 为可选外部技能，本技能不依赖其存在）；无 Math.Skill 时按 J 一致性手算。完成判据：每步有依据且可独立核验，符号推导在数值代入前完成。
 4. **验证（Verify）**：标准解答必查 F 量纲、L 极限/特例、B 回代、C 守恒量（适用时），按题型补充可选加分项；逐条给出 PASS/FAIL；失败则进入回溯修正协议。完成判据：验证门禁通过——四项必查全部 PASS 或 N/A（原因），FAIL 0 项。
 5. **复核（Review，可选）**：用户要求高置信度或题目复杂时，按 `modules/review_engine.md` 做独立复核并附复核结论；不要求时跳过。完成判据：触发时 P1–P5 全部 PASS，或白纸重推后 FAIL 0 项。
 6. **作答（Answer）**：先执行所选模板的结构门禁（默认模板 A 六节，见 `modules/output_templates.md`）；再给出最终答案（加粗、含单位与适用条件），附一行验算摘要；列出本题真实易错点（无则不写）。完成判据：所选模板结构门禁通过，答案加粗、验算摘要与格式规则全部满足。
@@ -42,6 +43,7 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 
 默认主流程为完整解题（模板 A）。当用户要求检查或诊断其作答时，先进入学生诊断模式；诊断结束且学生明确要完整解答时再回到主流程。
 
+- 模式分流：默认从零完整解题（模板 A）；用户提交作答求查时进入模板 C/E，不自动展开完整答案；高置信度复核按 `modules/review_engine.md` 执行。
 - 触发词与诊断协议见 `modules/tutoring_mode.md`，输出用模板 E。
 - 诊断模式直接指出缺项与错误，不做提示分级，不自动展开完整答案。
 
@@ -54,7 +56,7 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 - 公式优先用 `$$ ... $$` 块；行内公式用 `$...$` 仅限短符号。
 - 中文叙述 + 标准 LaTeX；剔除 emoji 及会导致 Overleaf 编译报错的字符；验证结果用 `PASS`/`FAIL` 纯文本。
 - 模板 A 固定六节标题：题意与图景、建模、推导、验算、答案、易错点；每节独立成节，禁止合并。
-- 验算节每条以 `①②③④`（可选 `⑤⑥`）开头；答案节用 Markdown `**...**` 显式加粗，`\boxed{}` 不作为替代。
+- 验算节每条以 `①②③④`（可选 `⑤⑥`，本域必做 `⑦J`）开头；答案节用 Markdown `**...**` 显式加粗，`\boxed{}` 不作为替代。
 - 最终答案必须附一行验算摘要，例如：`已通过 ①②③④，FAIL 0 项`。
 - 输出可完整复制进 Overleaf 编译。
 

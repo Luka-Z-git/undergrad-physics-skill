@@ -5,7 +5,7 @@ step-by-step derivations, built-in verification, Chinese explanations, and
 Overleaf-ready output.
 
 Covers: theoretical mechanics, electromagnetism, and basic quantum
-mechanics (v0.4).
+mechanics (v0.5.2).
 
 ## Features
 
@@ -106,11 +106,20 @@ undergrad-physics-skill/
 - [x] v0.2: electromagnetism
 - [x] v0.3: basic quantum mechanics
 - [x] v0.4: optional student diagnosis mode (non-primary)
-- [ ] v1.0: bilingual README polish and release
+- [x] v0.5: production hardening — scope boundaries, difficulty grading,
+  cost stop-loss in the backtrack protocol, confirmation-question standards
+- [x] v0.5.1: slimming — cross-domain trap-table dedup, README/test-case
+  compaction
+- [x] v0.5.2: review fixes — J numbering as ⑦, step references, Faraday
+  pointer, scope alignment, structural validator, license verification
+- [ ] v1.0: automated CI, English module sync, formal release
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+Dual-licensed: scripts (e.g. `tests/validate_structure.py`) are MIT (see
+[LICENSE](LICENSE)); module text, examples, and tests are
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See
+[NOTICE](NOTICE).
 
 ## Originality
 

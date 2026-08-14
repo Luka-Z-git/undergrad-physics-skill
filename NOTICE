@@ -1,12 +1,12 @@
 NOTICE
 
-undergrad-physics-skill v0.4
+undergrad-physics-skill v0.5.2
 Copyright (c) 2026 undergrad-physics-skill contributors
 
 This project is an original implementation. It was written with AI
 assistance and reviewed with automated QA. Its structure and methodology
 were inspired by the following public projects, without copying their
-source text:
+source text (licenses verified 2026-08-14 via upstream repositories):
 
 - Math.Skill: https://github.com/Wholiver/Math.Skill (MIT)
 - landau-mode: https://github.com/shaevitz/landau-mode (MIT)
@@ -14,6 +14,16 @@ source text:
 - xiaozhi-skills: https://github.com/qizhitang/xiaozhi-skills (MIT)
 - Agent Almanac: https://github.com/pjt222/agent-almanac (MIT)
 - Electromagnetism (LobeHub): https://lobehub.com/skills/tibsfox-gsd-skill-creator-electromagnetism
+  Upstream repository Tibsfox/gsd-skill-creator is licensed under the
+  Business Source License 1.1 (converts to GPL-3.0 on 2030-03-11).
+  Referenced for formula/pitfall structure only; no text or code from
+  that work is incorporated in this project.
 
 If any third-party code or text is incorporated in future releases, the
 original copyright notices will be retained.
+
+## Licensing
+
+- Scripts (e.g. `tests/validate_structure.py`): MIT License — see [LICENSE](LICENSE).
+- Prose content (module text, examples, tests, and documentation): [Creative
+  Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
