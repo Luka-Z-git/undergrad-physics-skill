@@ -32,3 +32,4 @@ labels: example
 - [ ] 无 emoji / 对勾叉号等 Overleaf 不兼容字符
 - [ ] `python tests/validate_structure.py` 通过
 - [ ] `python tests/size_budget.py` 通过
+- [ ] commit message 含 `Signed-off-by`（DCO）

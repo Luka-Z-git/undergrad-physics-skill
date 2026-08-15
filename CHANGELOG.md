@@ -27,6 +27,7 @@
 - `error_prevention.md` 增加跨域陷阱映射表，sanity check 绑定 F/E
 - CONTRIBUTING 细化：例题 PR 模板、风格指南、新增模块流程、TC 命名规范
 - README、CONTRIBUTING 与测试说明同步新的验算门禁
+- 脚本许可双许可为 MIT OR Apache-2.0；新增 LICENSE-APACHE、NOTICE 专利声明与贡献者 DCO
 
 ## v0.5.2 - 2026-08-14
 

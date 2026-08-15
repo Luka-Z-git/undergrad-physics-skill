@@ -110,7 +110,9 @@ undergrad-physics-skill/
 |-- CONTRIBUTING.md
 |-- CHANGELOG.md
 |-- NOTICE
-`-- LICENSE
+|-- LICENSE
+|-- LICENSE-APACHE
+`-- LICENSE-CC-BY
 ```
 
 ## Development Status
@@ -130,13 +132,17 @@ undergrad-physics-skill/
 
 ## License
 
-Dual-licensed: scripts (e.g. `tests/validate_structure.py`) are MIT (see
-[LICENSE](LICENSE)); module text, examples, and tests are
+Dual-licensed: scripts (e.g. `tests/validate_structure.py`) are MIT OR
+Apache-2.0 (see [LICENSE](LICENSE) and [LICENSE-APACHE](LICENSE-APACHE));
+module text, examples, and tests are
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (see
 [LICENSE-CC-BY](LICENSE-CC-BY)). See [NOTICE](NOTICE).
 
 Commercial use is allowed under CC BY 4.0 with attribution; this choice
-maximizes reuse.
+maximizes reuse. Publishing this repository constitutes public disclosure
+(prior art); scripts used under Apache-2.0 carry the standard patent grant
+and termination clause; the authors do not assert patents over the methods
+described here.
 
 ## Reporting Issues
 

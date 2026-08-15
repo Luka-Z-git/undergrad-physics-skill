@@ -62,6 +62,20 @@ PR 正文请包含：
 
 例题请使用自拟措辞的教科书通用问题（双摆、无限深势阱、RC 放电等），**不要整段搬运** Griffiths、Landau 等教材的题面原文。
 
+
+## 贡献者授权（DCO）
+
+提交 PR 时，请在 commit message 末尾加一行：
+
+```
+Signed-off-by: <你的名字> <你的邮箱>
+```
+
+这表示你确认：
+- 你有权提交这些改动；
+- 改动按本项目许可授权（脚本 MIT OR Apache-2.0；文本 CC BY 4.0）；
+- 你同意不利用本项目申请专利，且公开内容视为 prior art。
+
 ## 许可
 
-脚本（如 `tests/validate_structure.py`）按 [MIT](LICENSE) 授权；模块、例题与测试的文本按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权。详见 [NOTICE](NOTICE)。
+脚本（如 `tests/validate_structure.py`）按 [MIT](LICENSE) OR [Apache-2.0](LICENSE-APACHE) 双许可；模块、例题与测试的文本按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权。详见 [NOTICE](NOTICE)。

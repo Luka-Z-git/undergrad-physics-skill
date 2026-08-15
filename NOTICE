@@ -29,9 +29,21 @@ git history.
 
 ## Licensing
 
-- Scripts (e.g. `tests/validate_structure.py`): MIT License — see [LICENSE](LICENSE).
+- Scripts (e.g. `tests/validate_structure.py`): dual-licensed MIT OR Apache-2.0 — see [LICENSE](LICENSE) and [LICENSE-APACHE](LICENSE-APACHE).
 - Prose content (module text, examples, tests, and documentation): [Creative
   Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/),
   full notice in [LICENSE-CC-BY](LICENSE-CC-BY).
 - License decision (2026-08-15): prose content stays CC BY 4.0 to maximize
-  reuse, including commercial use with attribution; scripts stay MIT.
+  reuse, including commercial use with attribution; scripts are dual-licensed
+  MIT OR Apache-2.0 so users can rely on the Apache patent grant.
+
+## Patent Notice
+
+- The project authors do not assert patents over the methods described in
+  this repository; publishing here constitutes public disclosure (prior art).
+- Scripts used under Apache-2.0 carry the standard patent grant and
+  termination clause of Apache License 2.0, Section 3.
+- Contributors signing off with DCO certify that their contributions are
+  submitted under the project licenses and that they have the rights to
+  grant them.
+

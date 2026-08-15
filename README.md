@@ -50,7 +50,10 @@ undergrad-physics-skill/
 ├── .github/                      # CI（结构门禁）+ issue 模板
 ├── CONTRIBUTING.md               # 贡献与例题收录标准
 ├── CHANGELOG.md                  # 版本变更记录（Conventional Commits）
-└── NOTICE / LICENSE              # MIT（脚本）+ CC BY 4.0（文本）
+├── NOTICE                        # 许可与专利声明
+├── LICENSE                       # MIT（脚本可选）
+├── LICENSE-APACHE                # Apache-2.0（脚本可选，含专利条款）
+└── LICENSE-CC-BY                 # CC BY 4.0（文本）
 ```
 
 ## 开发状态
@@ -65,9 +68,11 @@ undergrad-physics-skill/
 
 ## 许可
 
-双许可：脚本（如 `tests/validate_structure.py`）为 MIT License（见 [LICENSE](LICENSE)）；模块、例题与测试的文本为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)（见 [LICENSE-CC-BY](LICENSE-CC-BY)）。详见 [NOTICE](NOTICE)。
+双许可：脚本（如 `tests/validate_structure.py`）为 MIT OR Apache-2.0（见 [LICENSE](LICENSE) 与 [LICENSE-APACHE](LICENSE-APACHE)）；模块、例题与测试的文本为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)（见 [LICENSE-CC-BY](LICENSE-CC-BY)）。详见 [NOTICE](NOTICE)。
 
 商用说明：CC BY 4.0 允许商用，只需署名并提供许可链接；本项目选择 CC BY 4.0 以最大化传播。
+
+许可与专利：本项目公开即构成 prior art；脚本按 Apache-2.0 使用时附带标准专利授权与终止条款（见 LICENSE-APACHE）；作者不主张本仓库方法的专利。
 
 ## 发现问题？
 
