@@ -1,6 +1,6 @@
 ---
 name: undergrad-physics-skill
-version: 0.5.2
+version: 0.6.0
 description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): step-by-step derivations with mandatory F/L/B/C verification before final answers. Use when deriving equations of motion, solving field/circuit/Schrödinger problems, verifying a derivation, or diagnosing a student's attempted solution. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
 ---
 

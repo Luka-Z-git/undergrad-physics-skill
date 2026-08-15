@@ -9,7 +9,7 @@ step-by-step derivations, built-in verification, Chinese explanations, and
 Overleaf-ready output.
 
 Covers: theoretical mechanics, electromagnetism, and basic quantum
-mechanics (v0.5.2).
+mechanics (v0.6.0).
 
 A quick-start demo is available in [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEMO.md).
 
@@ -58,9 +58,10 @@ use Math.Skill; without it, use the J consistency checks by hand.
 
 **Covers**: theoretical mechanics (Newtonian/Lagrangian/Hamiltonian, small
 oscillations, rigid bodies, non-inertial frames), electromagnetism
-(electrostatics, magnetostatics, circuits, Maxwell basics), and basic
-quantum mechanics (stationary Schrodinger equation, operators,
-commutators, one-dimensional systems).
+(electrostatics, magnetostatics, circuits, Maxwell basics, linear-media
+boundary conditions), and basic quantum mechanics (stationary Schrodinger
+equation, operators, commutators, one-dimensional systems,
+non-degenerate perturbation theory and spin-1/2 basics).
 
 **Out of scope**: other undergraduate topics (thermodynamics, optics,
 statistical physics, special relativity), graduate courses, research
@@ -99,9 +100,13 @@ undergrad-physics-skill/
 |   |-- tutoring_mode.md
 |   |-- output_templates.md
 |   |-- error_prevention.md
-|   `-- computation.md
+|   |-- computation.md
+|   `-- en/
+|-- docs/
 |-- examples/
 |-- tests/
+|-- CONTRIBUTING.md
+|-- CHANGELOG.md
 |-- NOTICE
 `-- LICENSE
 ```
@@ -118,7 +123,8 @@ undergrad-physics-skill/
   compaction
 - [x] v0.5.2: review fixes — J numbering as ⑦, step references, Faraday
   pointer, scope alignment, structural validator, license verification
-- [ ] v1.0: automated CI, English module sync, formal release
+- [x] v0.6: P0 complete; P1 perturbation/spin, D/H scope, error-prevention mapping, CONTRIBUTING, CHANGELOG
+- [ ] v1.0: English polish, formal release
 
 ## License
 

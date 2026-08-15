@@ -33,7 +33,7 @@ Fixed titles (use verbatim): `题意与图景`, `建模`, `推导`, `验算`, `�
 
 - Step-by-step derivation, each step annotated with its justification ("by the E-L equation", "substituting the constraint").
 - Symbols before numbers: carry the symbolic derivation through first; substitute numerical values only at the end.
-- Run a sanity check every 3–5 steps (substitute simple values or check dimensions).
+- Run at least one F dimensional check or E numerical sampling every 3–5 steps and record the result inline.
 - When delegating matrix / eigenvalue / matrix-power / recurrence subproblems to Math.Skill, note which results were borrowed (e.g., "matrix part verified by Math.Skill").
 
 ### 4. 验算 (Verification)

@@ -49,10 +49,8 @@ undergrad-physics-skill/
 ├── tests/                        # 用例断言（TC-XXX-NNN，18 个）+ 结构校验器
 ├── .github/                      # CI（结构门禁）+ issue 模板
 ├── CONTRIBUTING.md               # 贡献与例题收录标准
-├── NOTICE / LICENSE              # MIT（脚本）+ CC BY 4.0（文本）
-├── V0.5_CHANGES.md               # v0.4→v0.5 变更日志
-├── V0.5.1_SLIMMING_REPORT.md     # v0.5.1 瘦身报告
-└── V0.5.2_CHANGES.md             # v0.5.2 变更日志
+├── CHANGELOG.md                  # 版本变更记录（Conventional Commits）
+└── NOTICE / LICENSE              # MIT（脚本）+ CC BY 4.0（文本）
 ```
 
 ## 开发状态
@@ -62,6 +60,7 @@ undergrad-physics-skill/
 - [x] v0.5：生产级加固——范围边界、难度分级、成本止损、确认题标准
 - [x] v0.5.1：瘦身优化——跨域陷阱表去重、README/test_cases 精简
 - [x] v0.5.2：评审修复——⑦J 编号、步骤引用、法拉第指针、范围对齐、结构校验器、版权核实、5 个缺域例题、CI、英文模块同步、双许可
+- [x] v0.6：P0 完成；P1 微扰/自旋、D/H 范围声明、错误预防映射、CONTRIBUTING、CHANGELOG
 - [ ] v1.0：正式发布（市场投稿、反馈闭环）
 
 ## 许可

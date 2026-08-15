@@ -6,7 +6,7 @@ This module defines the error-prevention rules that must be observed during deri
 
 1. **No fabrication**: do not invent theorems, formulas, or "obviously true" steps. Mark uncertain intermediate steps explicitly; do not mask them with vague wording.
 2. **Carry units throughout**: every physical quantity carries units; intermediate results must be dimensionally consistent with the context; declare the unit system (SI/CGS) explicitly in the Parse step and never mix systems during derivation.
-3. **Write out all steps**: write every algebraic transformation explicitly; no mental-math skipping; run a sanity check with simple values or dimensions every 3–5 steps.
+3. **Write out all steps**: write every algebraic transformation explicitly; no mental-math skipping; run at least one F dimensional check or E numerical sampling every 3–5 steps and record the result inline.
 4. **Preconditions before theorems**: before invoking any law/theorem, verify that its applicability conditions hold (inertial frame, no dissipation, potential field, stationary state, small angle, etc.) and state them in the text.
 
 ## 1. Common Algebra and Calculus Errors in Physics
@@ -57,6 +57,22 @@ This table lists only cross-domain common checks; for electromagnetism and quant
 
 - **Electromagnetism**: rules for vector operators (gradient/divergence/curl) acting on scalars/vectors; applicability boundaries of integral vs. differential forms; continuity of boundary conditions at interfaces.
 - **Quantum mechanics**: operator ordering (non-commuting operators cannot be swapped); wavefunction normalization $\int|\psi|^2\,dx = 1$; eigenvalues of Hermitian operators are real.
+
+### Cross-Domain Trap Map (single source)
+
+| Cross-domain trap | Domains | Authority |
+|---|---|---|
+| SI/CGS mixing, missing units | All | this module §1 + `verification_engine.md` F |
+| Misusing energy/momentum conservation | Mechanics/EM | this module §2.4 + `electromagnetism.md` §3 |
+| Wrong/missing boundary conditions | EM/Quantum | `electromagnetism.md` §4 / `quantum_basics.md` §1 |
+| Operator ordering and Hermiticity | Quantum | `quantum_basics.md` §2 |
+| Missing normalization | Quantum | `quantum_basics.md` §1 |
+| Reversed exponential sign / time constant | EM circuits | `electromagnetism.md` §3 |
+| Small-angle / linearization overreach | Mechanics | this module §2.3 + `mechanics.md` |
+| Perturbation convergence / degenerate misuse | Quantum | `quantum_basics.md` §4 |
+| Confusing spin with orbital angular momentum | Quantum | `quantum_basics.md` §5 |
+
+Domain-specific errors are not repeated here; they live in each domain module's common-error table.
 
 ## 4. Pre-Submission Checklist (execute in full before answering)
 

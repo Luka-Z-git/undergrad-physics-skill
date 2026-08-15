@@ -1,6 +1,6 @@
 ---
 name: undergrad-physics-skill
-version: 0.5.2
+version: 0.6.0
 description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): step-by-step derivations with mandatory F/L/B/C verification before final answers. Use when deriving equations of motion, solving field/circuit/Schrödinger problems, verifying a derivation, or diagnosing a student's attempted solution. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
 ---
 
@@ -18,7 +18,7 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 
 - **理论力学**：牛顿力学、拉格朗日力学、哈密顿力学、运动微分方程、守恒量、小振动与简正模式、约束系统、刚体基础（平面运动/纯滚动/碰撞）、非惯性系。
 - **电磁学**：静电场、静磁场（真空为主；线性介质仅限边界条件层面，不涉及介质极化/磁化推导）、矢量分析（梯度/散度/旋度）、电势与场强、电容/电感、电路（RC/RL/RLC）、麦克斯韦方程组的基础应用。
-- **基础量子力学**：定态薛定谔方程、一维势阱/势垒、谐振子、角动量与算符、对易关系、氢原子能级的入门推导。
+- **基础量子力学**：定态薛定谔方程、一维势阱/势垒、谐振子、角动量与算符、对易关系、氢原子能级的入门推导、非简并微扰论与自旋 1/2 入门。
 
 ## 范围外
 
@@ -74,8 +74,8 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 | 独立复核 | `modules/review_engine.md` | 可选后置复核：病理过滤 P1–P5 与白纸重推 |
 | 学生诊断 | `modules/tutoring_mode.md` | 可选分支：检查学生作答、定位错误与概念误区 |
 | 理论力学 | `modules/mechanics.md` | 牛顿/拉格朗日/哈密顿/小振动/守恒量/非惯性系的分域协议与常见错误 |
-| 电磁学 | `modules/electromagnetism.md` | 静电场/静磁场/矢量分析/电路/麦克斯韦基础 |
-| 量子基础 | `modules/quantum_basics.md` | 定态薛定谔/算符/对易/一维系统 |
+| 电磁学 | `modules/electromagnetism.md` | 静电场/静磁场/矢量分析/电路/麦克斯韦基础/介质边界 |
+| 量子基础 | `modules/quantum_basics.md` | 定态薛定谔/算符/对易/一维系统/微扰与自旋入门 |
 | 错误预防 | `modules/error_prevention.md` | 跨域错误检查清单与陷阱表 |
 | 输出模板 | `modules/output_templates.md` | 标准解答/仅答案/解答检查模板与硬规则 |
 | 符号计算 | `modules/computation.md` | 可选 SymPy/SciPy 复核配方（无依赖降级友好） |

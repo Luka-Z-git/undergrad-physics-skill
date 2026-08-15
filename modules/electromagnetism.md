@@ -215,6 +215,32 @@ $$
 4. 能量流：坡印廷矢量 $\mathbf S = \frac{1}{\mu_0}\mathbf E\times\mathbf B$；能量密度 $u=\frac12\varepsilon_0E^2+\frac{1}{2\mu_0}B^2$。
 5. 界面边界条件：$D_{1n}-D_{2n}=\sigma_{\mathrm{free}}$、$E_{1t}=E_{2t}$、$B_{1n}=B_{2n}$、$H_{1t}-H_{2t}=K_{\mathrm{free}}$。
 
+### 线性介质中的宏观形式（范围声明）
+
+本技能不推导极化/磁化微观机制；线性介质仅使用宏观形式：
+
+$$
+\mathbf D=\varepsilon\mathbf E,\qquad \mathbf B=\mu\mathbf H
+$$
+
+宏观麦克斯韦方程组：
+
+$$
+\nabla\cdot\mathbf D=\rho_{\mathrm{free}}, \qquad \nabla\cdot\mathbf B=0
+$$
+
+$$
+\nabla\times\mathbf E=-\frac{\partial\mathbf B}{\partial t}, \qquad
+\nabla\times\mathbf H=\mathbf J_{\mathrm{free}}+\frac{\partial\mathbf D}{\partial t}
+$$
+
+位移电流 $\partial\mathbf D/\partial t$（真空中 $\varepsilon_0\partial\mathbf E/\partial t$）是时变电场的等效电流源，保证电荷守恒 $\nabla\cdot\mathbf J+\partial\rho/\partial t=0$。
+
+边界条件：$D_{1n}-D_{2n}=\sigma_{\mathrm{free}}$、$E_{1t}=E_{2t}$、$B_{1n}=B_{2n}$、$H_{1t}-H_{2t}=K_{\mathrm{free}}$。
+
+使用限制：仅限线性各向同性介质；铁磁材料、非线性介质与极化/磁化机制推导不在范围（见 SKILL.md 范围声明）。
+
+
 ### 验证组合
 
 必查 F, L, B（C 适用时）；建议加做 J, E, D。

@@ -2,7 +2,7 @@
 
 ## Scope
 
-**Electromagnetism**: electrostatics, magnetostatics, vector analysis, capacitance/inductance, circuit transients (RC/RL/RLC), foundations of Maxwell's equations. **Media are treated primarily as vacuum**; linear media are covered only at the level of boundary conditions (see the scope statement in SKILL.md).
+**Electromagnetism**: electrostatics, magnetostatics, vector analysis, capacitance/inductance, circuit transients (RC/RL/RLC), foundations of Maxwell's equations. **Media are treated primarily as vacuum**; linear media are covered only at the level of boundary conditions (see the scope statement in SKILL.md). Macroscopic D/H forms are used only there; polarization/magnetization mechanisms are out of scope.
 
 (Standard subdomain structure as in mechanics.md)
 
@@ -235,6 +235,32 @@ Required: F, L, B (C when applicable); recommended additional: J, E, D.
 | $\mathbf E$ parallel to $\mathbf B$ in a plane wave | They are mutually perpendicular and both perpendicular to the propagation direction |
 | Applying $|\mathbf E|=c|\mathbf B|$ in a conducting medium | Holds only in free space; wave speed and impedance change in media |
 | Listing boundary conditions for $E$ only or $B$ only | List all four normal/tangential conditions separately for each interface |
+
+### Linear Media and the Macroscopic Maxwell Equations (Scope Statement)
+
+This skill does not derive polarization/magnetization mechanisms. Linear media are used only in macroscopic form:
+
+$$
+\mathbf D=\varepsilon\mathbf E,\qquad \mathbf B=\mu\mathbf H
+$$
+
+Macroscopic Maxwell equations:
+
+$$
+\nabla\cdot\mathbf D=\rho_{\mathrm{free}}, \qquad \nabla\cdot\mathbf B=0
+$$
+
+$$
+\nabla\times\mathbf E=-\frac{\partial\mathbf B}{\partial t}, \qquad
+\nabla\times\mathbf H=\mathbf J_{\mathrm{free}}+\frac{\partial\mathbf D}{\partial t}
+$$
+
+The displacement current $\partial\mathbf D/\partial t$ (in vacuum $\varepsilon_0\partial\mathbf E/\partial t$) is the equivalent current source of a time-varying electric field and guarantees charge conservation $\nabla\cdot\mathbf J+\partial\rho/\partial t=0$.
+
+Boundary conditions: $D_{1n}-D_{2n}=\sigma_{\mathrm{free}}$, $E_{1t}=E_{2t}$, $B_{1n}=B_{2n}$, $H_{1t}-H_{2t}=K_{\mathrm{free}}$.
+
+Limits: linear isotropic media only; ferromagnetic materials, nonlinear media, and polarization/magnetization mechanisms are out of scope (see the scope statement in SKILL.md).
+
 
 ## 5. Formulas & Traps
 

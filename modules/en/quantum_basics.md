@@ -2,7 +2,7 @@
 
 ## Scope
 
-**Basic quantum mechanics**: wavefunctions and the probability interpretation, the time-independent Schrödinger equation, one-dimensional wells/barriers, the harmonic oscillator, operators and commutators, angular momentum, and an introductory treatment of hydrogen-atom energy levels (**non-relativistic, fine structure ignored**).
+**Basic quantum mechanics**: wavefunctions and the probability interpretation, the time-independent Schrödinger equation, one-dimensional wells/barriers, the harmonic oscillator, operators and commutators, angular momentum, hydrogen-atom energy levels, plus an introduction to non-degenerate perturbation theory and spin 1/2 (**non-relativistic, fine structure ignored**; degenerate perturbation and relativistic QM are out of scope).
 
 (Standard sub-domain structure is the same as `mechanics.md`.)
 
@@ -157,7 +157,95 @@ Mandatory F, L, B (C when applicable); recommended J, E, D.
 | Magnetic quantum number outside $[-l,l]$ | $m=-l,\ldots,l$, $2l+1$ values |
 | Ignoring wavefunction / angular normalization | Normalize $Y_{lm}$ and $R_{nl}$ separately |
 
-## 4. Formula Reference and Traps
+## 4. Non-Degenerate Perturbation Theory (Intro)
+
+### Recognition
+
+- Hamiltonian $H=H_0+\lambda V'$, with a known non-degenerate spectrum of $H_0$ and a small perturbation.
+- Find first- and second-order energy corrections and the first-order state correction.
+
+### Modeling Steps
+
+1. Solve $H_0|n^{(0)}\rangle=E_n^{(0)}|n^{(0)}\rangle$; confirm $|n^{(0)}\rangle$ is non-degenerate and state the smallness condition.
+2. First-order energy:
+
+$$
+E_n^{(1)}=\langle n^{(0)}|V'|n^{(0)}\rangle
+$$
+
+3. Second-order energy:
+
+$$
+E_n^{(2)}=\sum_{m\neq n}\frac{|\langle m^{(0)}|V'|n^{(0)}\rangle|^2}{E_n^{(0)}-E_m^{(0)}}
+$$
+
+4. First-order state correction:
+
+$$
+|n^{(1)}\rangle=\sum_{m\neq n}\frac{\langle m^{(0)}|V'|n^{(0)}\rangle}{E_n^{(0)}-E_m^{(0)}}|m^{(0)}\rangle
+$$
+
+### Verification Set
+
+Required F, L, B (C when applicable); suggested J, E, I.
+
+### Applicability Checks
+
+- The level must be non-degenerate; degenerate perturbation requires diagonalizing the degenerate subspace and is out of scope here.
+- Matrix elements are finite and denominators $E_n^{(0)}-E_m^{(0)}$ are nonzero.
+- Convergence requires $|\langle m^{(0)}|V'|n^{(0)}\rangle|\ll|E_n^{(0)}-E_m^{(0)}|$; otherwise state that perturbation theory does not apply.
+- $H_0$ and $V'$ are Hermitian; energy corrections are real.
+
+### Common Errors
+
+| Error | Correct |
+|---|---|
+| Apply the non-degenerate formula to a degenerate level | Diagonalize the degenerate subspace first |
+| Divide by zero | Check $E_n^{(0)}\neq E_m^{(0)}$ |
+| Drop the squared absolute value in second order | Use $|\langle m^{(0)}|V'|n^{(0)}\rangle|^2$ |
+| Forget renormalization | Renormalize the corrected state |
+
+## 5. Spin 1/2 Basics
+
+### Recognition
+
+- Observables: $S^2$, $S_z$, Pauli matrices; singlet/triplet combinations.
+- Electron spin 1/2: $S_z$ eigenvalues $\pm\hbar/2$.
+
+### Modeling Steps
+
+1. Spin operators $\mathbf S=\frac{\hbar}{2}\boldsymbol\sigma$ with Pauli matrices:
+
+$$
+\sigma_x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+\sigma_y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\qquad
+\sigma_z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+$$
+
+2. Eigenstates: $S_z|\uparrow\rangle=+\frac{\hbar}{2}|\uparrow\rangle$, $S_z|\downarrow\rangle=-\frac{\hbar}{2}|\downarrow\rangle$; $S^2=s(s+1)\hbar^2$ with $s=1/2$.
+3. Commutators and identities: $[S_x,S_y]=i\hbar S_z$ (cyclic); $\sigma_i^2=I$; $\{\sigma_i,\sigma_j\}=0$ for $i\neq j$.
+4. Two-spin combinations: singlet $|00\rangle=\frac{1}{\sqrt2}(|\uparrow\downarrow\rangle-|\downarrow\uparrow\rangle)$ ($S=0$); triplet $|11\rangle=|\uparrow\uparrow\rangle$ etc. ($S=1$).
+
+### Verification Set
+
+Required F, L, B (C when applicable); suggested J, E.
+
+### Applicability Checks
+
+- Non-relativistic; spin-orbit coupling and fine structure are out of scope.
+- Pauli matrices act on spin space, distinct from orbital angular momentum.
+- Check coupling coefficients when decomposing singlet/triplet states.
+
+### Common Errors
+
+| Error | Correct |
+|---|---|
+| Treat spin like orbital angular momentum | Spin is intrinsic; $S^2=s(s+1)\hbar^2$ |
+| Wrong trace/determinant of Pauli matrices | $\mathrm{tr}\,\sigma_i=0$, $\det\sigma_i=-1$, $\sigma_i^2=I$ |
+| Wrong cyclic sign | $[S_x,S_y]=i\hbar S_z$ |
+| Confuse singlet with triplet | Singlet antisymmetric, triplet symmetric |
+
+## 6. Formula Reference and Traps
 
 ### Formula Reference
 
