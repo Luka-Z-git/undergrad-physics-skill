@@ -2,7 +2,7 @@
 
 本项目提交信息遵循 [Conventional Commits](https://www.conventionalcommits.org/) 风格（feat/fix/docs/refactor/chore），本文件由人工维护。
 
-## v0.7.0 (unreleased)
+## v0.7.0 - 2026-08-15
 
 ### Added
 
