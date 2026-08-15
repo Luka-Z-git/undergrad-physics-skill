@@ -14,7 +14,7 @@ jobs:
           python-version: "3.11"
       - name: Run structural gate on template-A examples
         run: |
-          python tests/validate_structure.py $(find examples -name '*.md' ! -name 'tutoring_diagnosis.md')
+          python tests/validate_structure.py $(find examples -name '*.md' ! -name 'tutoring_diagnosis.md' ! -name 'INDEX.md')
       - name: Run numeric regression
         run: python tests/numeric_regression.py
       - name: Run size budget
