@@ -1,11 +1,17 @@
 # undergrad-physics-skill
 
+![License](https://img.shields.io/badge/License-MIT%20%2B%20CC%20BY%204.0-orange)
+![Examples](https://img.shields.io/badge/examples-20-blue)
+![Tests](https://img.shields.io/badge/tests-18-blue)
+
 A Codex/Claude skill for solving undergraduate physics problems with
 step-by-step derivations, built-in verification, Chinese explanations, and
 Overleaf-ready output.
 
 Covers: theoretical mechanics, electromagnetism, and basic quantum
 mechanics (v0.5.2).
+
+A quick-start demo is available in [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEMO.md).
 
 ## Features
 
@@ -120,6 +126,18 @@ Dual-licensed: scripts (e.g. `tests/validate_structure.py`) are MIT (see
 [LICENSE](LICENSE)); module text, examples, and tests are
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (see
 [LICENSE-CC-BY](LICENSE-CC-BY)). See [NOTICE](NOTICE).
+
+Commercial use is allowed under CC BY 4.0 with attribution; this choice
+maximizes reuse.
+
+## Reporting Issues
+
+Found a wrong answer, skipped verification, or a formatting problem? Open an issue:
+
+- [Wrong answer report](.github/ISSUE_TEMPLATE/wrong_answer.md): report errors, fake PASS, or missing checks
+- [New example proposal](.github/ISSUE_TEMPLATE/new_example.md): propose examples for uncovered topics
+
+Include the problem statement, the skill output, and your own derivation when possible.
 
 ## Originality
 

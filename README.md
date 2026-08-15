@@ -1,10 +1,14 @@
 # undergrad-physics-skill
 
+![License](https://img.shields.io/badge/License-MIT%20%2B%20CC%20BY%204.0-orange)
+![Examples](https://img.shields.io/badge/examples-20-blue)
+![Tests](https://img.shields.io/badge/tests-18-blue)
+
 面向大学本科物理习题的 Codex/Claude 推导型技能：**分步推导 + 内置验证 + 中文叙述 + Overleaf 可编译输出**。
 
 English version: [README.en.md](README.en.md)
 
-**快速上手**：`SKILL.md` 包含完整的定位、工作流、验证引擎摘要与模块索引。本文档仅补充安装、触发方式与项目元信息。
+**快速上手**：`SKILL.md` 包含完整的定位、工作流、验证引擎摘要与模块索引。快速开始演示见 [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEMO.md)。本文档仅补充安装、触发方式与项目元信息。
 
 ## 安装
 
@@ -29,6 +33,7 @@ English version: [README.en.md](README.en.md)
 undergrad-physics-skill/
 ├── SKILL.md                      # 主干：定位、工作流、验证摘要、模块索引
 ├── SKILL.en.md                   # English trunk
+├── docs/                        # 快速开始演示
 ├── modules/
 │   ├── mechanics.md              # 理论力学领域协议
 │   ├── electromagnetism.md       # 电磁学领域协议
@@ -39,8 +44,8 @@ undergrad-physics-skill/
 │   ├── output_templates.md       # 输出模板 + v0.5 难度分级
 │   ├── error_prevention.md       # 跨域错误预防清单
 │   ├── computation.md            # 可选 SymPy/SciPy 复核配方
-│   └── en/                       # 英文同步模块
-├── examples/                     # 完整带验证的例题（13 个）
+│   └── en/                       # 英文同步模块（发布时生成物，随中文版更新）
+├── examples/                     # 完整带验证的例题（20 个）
 ├── tests/                        # 用例断言（TC-XXX-NNN，18 个）+ 结构校验器
 ├── .github/                      # CI（结构门禁）+ issue 模板
 ├── CONTRIBUTING.md               # 贡献与例题收录标准
@@ -62,6 +67,17 @@ undergrad-physics-skill/
 ## 许可
 
 双许可：脚本（如 `tests/validate_structure.py`）为 MIT License（见 [LICENSE](LICENSE)）；模块、例题与测试的文本为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)（见 [LICENSE-CC-BY](LICENSE-CC-BY)）。详见 [NOTICE](NOTICE)。
+
+商用说明：CC BY 4.0 允许商用，只需署名并提供许可链接；本项目选择 CC BY 4.0 以最大化传播。
+
+## 发现问题？
+
+发现解题错误、验证被跳过或格式问题，请提交 Issue：
+
+- [错题报告](.github/ISSUE_TEMPLATE/wrong_answer.md)：报告错误、伪造 PASS 或遗漏验证
+- [新例题提案](.github/ISSUE_TEMPLATE/new_example.md)：提议补充缺失题型
+
+提交前尽量附上题目、技能输出与你自己的推算，便于定位。
 
 ## 致谢 (Credits)
 

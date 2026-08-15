@@ -22,9 +22,16 @@ source text (licenses verified 2026-08-14 via upstream repositories):
 If any third-party code or text is incorporated in future releases, the
 original copyright notices will be retained.
 
+AI assistance disclosure: this project was designed, authored, and reviewed
+by human contributors. AI tools were used for text generation assistance and
+formatting. Human review and commit history are recorded in the repository's
+git history.
+
 ## Licensing
 
 - Scripts (e.g. `tests/validate_structure.py`): MIT License — see [LICENSE](LICENSE).
 - Prose content (module text, examples, tests, and documentation): [Creative
   Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/),
   full notice in [LICENSE-CC-BY](LICENSE-CC-BY).
+- License decision (2026-08-15): prose content stays CC BY 4.0 to maximize
+  reuse, including commercial use with attribution; scripts stay MIT.

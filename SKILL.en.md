@@ -8,6 +8,8 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 
 Undergraduate physics problem-solving skill: step-by-step derivation + built-in verification + Chinese narration + Overleaf-compilable output.
 
+> English modules under `modules/en/` are synced artifacts of the Chinese originals. Edit the Chinese modules first; update the English copies during release.
+
 ## Positioning
 
 A derivation-oriented skill for undergraduate physics problems (classical mechanics, electromagnetism, basic quantum mechanics). Every solution must follow **step-by-step derivation → multi-method independent verification → final answer only after verification passes**. When verification fails, roll back and fix; when verification is impossible, state so honestly — outputting an unverified "best guess" is forbidden.
