@@ -64,7 +64,7 @@ $$
 - **⑤ E 数值抽样**（可选加分项）：$m = 1\,\mathrm{kg}$、$k = 1\,\mathrm{N/m}$ 时 $\omega = 1\,\mathrm{s^{-1}}$、$T = 2\pi\,\mathrm{s}$；$x(0)=1\,\mathrm{m}$、$p(0)=0$ 时 $E = 0.5\,\mathrm{J}$，与④一致。**PASS**。
 - **⑥ I 独立方法**（可选加分项）：直接解牛顿方程 $m\ddot x = -kx$ 得同一角频率 $\omega = \sqrt{k/m}$ 与周期 $2\pi\sqrt{m/k}$。**PASS**。
 
-验算摘要：`已通过 ①②③④，FAIL 0 项（⑤⑥ 已加做）`
+验算：`①②③④，FAIL 0 项（⑤⑥ 已加做）`
 
 ## 答案
 

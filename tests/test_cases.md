@@ -14,6 +14,8 @@ python tests/validate_structure.py <answer.md>
 
 TC-NEW-001 · TC-TUT-001 · TC-ELE-001 · TC-QNT-001
 
+核心流程或验证引擎变更后，另运行 `adversarial_cases.md` 的 TC-ADV-001 至 TC-ADV-006；这些用例检验错误能否被实际验算捕获，而不只检查输出结构。
+
 ## 用例清单
 
 | 编号 | 领域 | 复杂度 | 题目 |

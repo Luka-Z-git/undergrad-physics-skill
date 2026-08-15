@@ -1,13 +1,13 @@
 # Independent Review Engine
 
-This module is an **optional** post-hoc review protocol and does not run by default in the main flow. Purpose: after a standard solution is completed, independently audit the entire derivation, quickly locate suspect steps, and decide whether a full re-derivation is needed. Applies when the user demands high confidence, the problem is complex, or standard verification once FAILed before passing on re-verification.
+This module is an **optional** review protocol; it is not part of the default flow. Use it after a standard solution to audit the full derivation, locate suspect steps, and decide whether a complete re-derivation is needed. Trigger it when the user requests high confidence, the problem is complex, or standard verification has failed and been repaired.
 
-Zero external dependencies: the review is performed by reasoning itself, with no scripts invoked; for optional symbolic review, see `computation.md`.
+The review has no external dependencies and invokes no scripts. For optional symbolic checks, see `computation.md`.
 
 ## 1. When to Use
 
 - The user explicitly asks for "review / audit / double-check".
-- The problem is complex, or standard verification once FAILed (even if it passed after a fix).
+- The problem is complex, or standard verification has failed and been repaired (even if it passed after the fix).
 - The user provides an existing solution to be audited (Template C may first use this protocol to locate errors).
 
 ## 2. Pathology Filter
@@ -22,7 +22,7 @@ Check the entire derivation in order; any FAIL records a pathology:
 | P4 | Causality/direction | The result violates time ordering, reference-frame direction conventions, or the relationship between force and relative-motion direction |
 | P5 | Domain | The result diverges at parameter boundaries, the squared frequency is negative, or the energy is negative without the applicability conditions being declared |
 
-Each FAIL must record: **step where found + specific discrepancy + first suspect intermediate result**. Writing only "the result is wrong" is not allowed.
+For each FAIL, record the **step where it was found, the specific discrepancy, and the first suspect intermediate result**. A bare statement such as "the result is wrong" is insufficient.
 
 ## 3. Blank-Paper Restart
 
@@ -31,7 +31,7 @@ When the Pathology Filter finds a FAIL:
 1. Discard all work from the first suspect intermediate result onward; patching signs locally is forbidden.
 2. Re-derive from the last complete intermediate result that passed checking (if none, return to modeling).
 3. Re-derive along an independently verifiable path, or at least reorganize the derivation in a different way.
-4. After re-deriving, re-run the standard four mandatory checks (F/L/B/C where applicable) and all of P1–P5.
+4. After re-deriving, re-run the selected minimum sufficient verification set and all of P1–P5.
 
 If the re-derived result agrees with the first draft and all checks pass, record "review found no pathology"; do not force a disagreement.
 

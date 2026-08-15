@@ -4,11 +4,11 @@
 
 **Theoretical Mechanics**: Newtonian mechanics, Lagrangian mechanics, Hamiltonian mechanics, conservation laws and symmetries, small oscillations and normal modes, rigid body basics, non-inertial frames.
 
-(Standard subdomain structure: Identifying Features → Modeling Steps → Verification Set → Applicability Conditions → Common Errors table; verification definitions are given in `verification_engine.md`)
+Each subdomain follows the same structure: identifying features, modeling steps, a verification set, applicability conditions, and a common-errors table. Verification definitions are in `verification_engine.md`.
 
 ## 0. Method Selection Table
 
-Select the equation framework according to the system's features; when multiple methods apply, choose the one with the shortest derivation and the most direct verification, and state the reason in one sentence in the modeling section.
+Choose the equation framework from the system's features. If several methods apply, use the one that gives the shortest derivation and the clearest verification, and state the choice in one sentence in the Modeling section.
 
 | System Feature | Preferred Method | Reason for Choice | Domain-Specific Verification |
 |---|---|---|---|
@@ -25,7 +25,7 @@ Select the equation framework according to the system's features; when multiple 
 
 - Particle or system of particles, few constraints or constraints explicitly writable; forces (gravity, elastic force, tension, friction) are known functions.
 - Quantities sought are accelerations, trajectories, or constraint reaction forces; handles both single- and multi-degree-of-freedom systems.
-- The system moves in an inertial frame; for non-inertial frame problems see §7.
+- The system moves in an inertial frame; see §7 for non-inertial-frame problems.
 
 ### Modeling Steps
 
@@ -37,11 +37,11 @@ Select the equation framework according to the system's features; when multiple 
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); recommended additional: D, E, I.
+Recommended verification set: F + B + D or L; add C only when a conservation law applies, and add I or E when the problem is high-risk.
 
 ### Applicability Conditions to Check
 
-- Newton's second law holds only in inertial frames; for surface-level problems, treating the Earth as an inertial frame must be declared.
+- Newton's second law holds only in inertial frames; for introductory problems, state explicitly when the Earth is being approximated as an inertial frame.
 - Ropes, massless rods, and frictionless surfaces are idealized models; with friction present, a kinetic/static friction model must be introduced and the friction coefficient declared.
 - Forces must be known functions; time-dependent, position-dependent, and velocity-dependent forces (damping) are handled separately.
 
@@ -78,7 +78,7 @@ $$
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); recommended additional: I, E.
+Recommended verification set: F + B + I or C; add E when numerical scale matters.
 
 ### Applicability Conditions to Check
 
@@ -114,7 +114,7 @@ Required: F, L, B (C when applicable); recommended additional: I, E.
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); J is mandatory in this domain; recommended additional: I, E.
+Recommended verification set: F + B + J; J is mandatory for this domain. Add I or E when useful.
 
 ### Applicability Conditions to Check
 
@@ -150,7 +150,7 @@ Required: F, L, B (C when applicable); J is mandatory in this domain; recommende
 
 ### Verification Set
 
-Required: F, L, B, C (conserved quantities are the goal of the problem and must be verified); recommended additional: I, E.
+Recommended verification set: F + B + C; add I or E when an independent check is useful.
 
 ### Applicability Conditions to Check
 
@@ -185,7 +185,7 @@ Required: F, L, B, C (conserved quantities are the goal of the problem and must 
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); J is mandatory in this domain; recommended additional: E, D.
+Recommended verification set: F + B + J; J is mandatory for this domain. Add E or D when useful.
 
 ### Applicability Conditions to Check
 
@@ -220,7 +220,7 @@ Required: F, L, B (C when applicable); J is mandatory in this domain; recommende
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); recommended additional: I, E.
+Recommended verification set: F + B + I or L; add E when numerical scale matters.
 
 ### Applicability Conditions to Check
 
@@ -260,7 +260,7 @@ $$
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); recommended additional: I, E.
+Recommended verification set: F + B + I or L; add E when numerical scale matters.
 
 ### Applicability Conditions to Check
 

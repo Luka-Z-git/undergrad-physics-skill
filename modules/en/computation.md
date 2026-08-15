@@ -1,8 +1,8 @@
 # Symbolic Computation Recipes (Optional Computation)
 
-This module is an **optional** cross-check tool, not part of the main flow. Use it only when **Python + SymPy/SciPy is available in the environment AND the user requests it**.
+This module provides **optional** cross-check recipes; it is not part of the main flow. Use it only when **Python plus SymPy/SciPy is available and the user requests it**.
 
-**Discipline**: recipe output is only a cross-check and cannot replace the main flow's PASS/FAIL records; when results disagree with hand calculation, handle it via the backtracking correction protocol.
+**Rule**: output from these recipes is cross-check evidence only; it cannot replace the main flow's PASS/FAIL records. If it disagrees with a hand calculation, follow the Backtrack-and-Fix Protocol.
 
 ## Recipe Overview
 
@@ -19,7 +19,7 @@ This module is an **optional** cross-check tool, not part of the main flow. Use 
 
 ## Recipe 1: Symbolic ODE Solving (general)
 
-Applies to any ODE verifiable with `dsolve` or manual differentiation — Lagrangian → E-L equations, circuit transients, etc.
+Use this recipe for any ODE that can be checked with `dsolve` or by manual differentiation, including Lagrangian E–L equations and circuit transients.
 
 **Example A — Pendulum E-L equation**:
 

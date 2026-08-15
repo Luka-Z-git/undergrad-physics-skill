@@ -4,11 +4,11 @@
 
 **Basic quantum mechanics**: wavefunctions and the probability interpretation, the time-independent Schrödinger equation, one-dimensional wells/barriers, the harmonic oscillator, operators and commutators, angular momentum, hydrogen-atom energy levels, plus an introduction to non-degenerate perturbation theory and spin 1/2 (**non-relativistic, fine structure ignored**; degenerate perturbation and relativistic QM are out of scope).
 
-(Standard sub-domain structure is the same as `mechanics.md`.)
+Each subdomain follows the structure used in `mechanics.md`: identifying features, modeling steps, a verification set, applicability conditions, and a common-errors table.
 
 ## 0. Method Selection Table
 
-Select the equation framework by system features; when multiple methods work, choose the shortest derivation with the most direct verification and state the reason in one sentence in the Modeling section.
+Choose the equation framework from the system's features. If several methods work, use the one that gives the shortest derivation and the clearest verification, and state the choice in one sentence in the Modeling section.
 
 | System features | Preferred method | Reason | Domain-specific verification |
 |---|---|---|---|
@@ -41,7 +41,7 @@ $$
 
 ### Verification Set
 
-Mandatory F, L, B (C when applicable); recommended J, E, D.
+Recommended verification set: F + B + J; J is mandatory for this domain. Add E or D when useful.
 
 ### Applicability Conditions to Check
 
@@ -94,7 +94,7 @@ $$
 
 ### Verification Set
 
-Mandatory F, L, B (C when applicable); recommended J, E, D.
+Recommended verification set: F + B + J; J is mandatory for this domain. Add E or D when useful.
 
 ### Applicability Conditions to Check
 
@@ -139,7 +139,7 @@ $$
 
 ### Verification Set
 
-Mandatory F, L, B (C when applicable); recommended J, E, D.
+Recommended verification set: F + B + J; J is mandatory for this domain. Add E or D when useful.
 
 ### Applicability Conditions to Check
 
@@ -187,7 +187,7 @@ $$
 
 ### Verification Set
 
-Required F, L, B (C when applicable); suggested J, E, I.
+Recommended verification set: F + B + J; add E or I when useful.
 
 ### Applicability Checks
 
@@ -228,7 +228,7 @@ $$
 
 ### Verification Set
 
-Required F, L, B (C when applicable); suggested J, E.
+Recommended verification set: F + B + J; add E when useful.
 
 ### Applicability Checks
 

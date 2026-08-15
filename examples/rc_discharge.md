@@ -56,7 +56,7 @@ $$
 - **⑤ E 数值抽样**（可选加分项）：$R=1\,\mathrm{k\Omega}$、$C=100\,\mu\mathrm{F}$、$V_0=5\,\mathrm{V}$：$\tau=0.1\,\mathrm{s}$；$t=0.1\,\mathrm{s}$ 时 $V\approx1.84\,\mathrm{V}$、$I\approx1.84\,\mathrm{mA}$。**PASS**。
 - **⑥ I 独立方法**（可选加分项）：直接分离变量积分 $\int dV/V = -\int dt/\tau$，得同一解 $V_0 e^{-t/\tau}$。**PASS**。
 
-验算摘要：`已通过 ①②③④，FAIL 0 项（⑤⑥ 已加做）`
+验算：`①②③④，FAIL 0 项（⑤⑥ 已加做）`
 
 ## 答案
 

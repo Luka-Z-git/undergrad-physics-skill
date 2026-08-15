@@ -1,16 +1,16 @@
 ---
 name: undergrad-physics-skill
 version: 0.6.0
-description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): step-by-step derivations with mandatory F/L/B/C verification before final answers. Use when deriving equations of motion, solving field/circuit/Schrödinger problems, verifying a derivation, or diagnosing a student's attempted solution. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
+description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): derivations with a minimum sufficient verification set before final answers. Use for equations of motion, field/circuit/Schrödinger problems, derivation checks, or student-answer diagnosis. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
 ---
 
 # undergrad-physics-skill
 
-本科物理刷题技能：分步推导 + 内置验证 + 中文叙述 + Overleaf 可编译输出。
+本科物理刷题技能：分步推导 + 内置验证 + 中文叙述 + LaTeX-ready 输出。
 
 ## 定位
 
-面向大学本科物理习题（理论力学、电磁学、基础量子力学）的推导型技能。每次解答必须经过**分步推导 → 多方法独立验证 → 验证通过后才给最终答案**。验证失败时回退修正；无法验证时如实声明，禁止输出未经验证的"最佳猜测"。
+面向大学本科物理习题（理论力学、电磁学、基础量子力学）的推导型技能。每次解答必须经过**分步推导 → 最小充分验算 → 验算通过后才给最终答案**。无法完成验算时，说明不确定性、缺失条件和下一步所需信息。
 
 本技能零外部依赖：验证流程由推理本身执行（手算/符号代入/数值抽样），不依赖任何脚本、环境或插件。可选地，当环境中存在 Python/SymPy 且用户要求时，可用符号计算复核（见 `modules/computation.md`），但没有它本技能也能完整工作。
 
@@ -28,14 +28,26 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 - 纯实验课内容、计算物理编程任务。
 - 仅做独立审查而不解题也不诊断的工作流不在范围。
 
+## 入口路由
+
+| 用户意图 | 入口 |
+|---|---|
+| 完整求解/推导 | 模板 A + 核心工作流 |
+| 只要结果 | 模板 B + 最小必要验算 |
+| 概念问答 | 模板 D + 最小示例 |
+| 检查/诊断作答 | 模板 C/E + 学生诊断模式 |
+| 要求 Overleaf 可编译文档 | 在上述入口基础上切换 LaTeX 文档模式 |
+
+模板完整定义见 `modules/output_templates.md`。
+
 ## 核心工作流
 
 对每个问题按以下顺序执行；每步达到完成判据后才进入下一步。
 
-1. **解析（Parse）**：提取物理系统——对象、自由度、约束、坐标系、单位制、初始/边界条件、已知量与待求量；列出隐式条件（如分母非零、能量实性、参数范围）；若 `examples/` 有对应题型示例，先读取其模板结构与验证风格（仅作格式参考，不照抄答案）。**条件不足或表述有歧义时**：缺关键参数优先向用户提问澄清；可作合理假设时显式声明假设后继续，禁止编造题目未给定的数值。完成判据：以上各项全部显式列出，无未声明的参数或条件。
+1. **解析（Parse）**：提取物理系统——对象、自由度、约束、坐标系、单位制、初始/边界条件、已知量与待求量；列出隐式条件（如分母非零、能量实性、参数范围）。复杂题、高风险题或用户要求高置信度时，按 `examples/INDEX.md` 的题型索引读取**一个**对应示例，只借鉴结构与验算风格。条件不足时，提出关键澄清问题；可作合理假设时显式声明后继续。完成判据：以上各项全部显式列出，无未声明的参数或条件。
 2. **建模（Model）**：选择方程体系（牛顿/拉格朗日/哈密顿/麦克斯韦/薛定谔），说明选择理由；写出拉格朗日量、哈密顿量或方程组的显式形式；确认每个被引用定理/定律的适用条件。完成判据：方程体系、显式表达式、适用条件三者齐备。
-3. **推导（Derive）**：分步推导，每步注明依据；先以符号推导、最后代入数值；每 3–5 步至少执行一次 F 量纲或 E 数值抽样并内联记录结果；矩阵、特征值、矩阵幂、递推等线性代数子问题可调用 Math.Skill 并注明借用了哪些结果（Math.Skill 为可选外部技能，本技能不依赖其存在）；无 Math.Skill 时按 J 一致性手算。完成判据：每步有依据且可独立核验，符号推导在数值代入前完成。
-4. **验证（Verify）**：标准解答必查 F 量纲、L 极限/特例、B 回代、C 守恒量（适用时），按题型补充可选加分项；逐条给出 PASS/FAIL；失败则进入回溯修正协议。完成判据：验证门禁通过——四项必查全部 PASS 或 N/A（原因），FAIL 0 项。
+3. **推导（Derive）**：分步推导，每步注明依据；先以符号推导、最后代入数值。在关键中间结果、近似/表示切换和最终结果前，执行最适合的快速核验并内联记录。矩阵、特征值、矩阵幂、递推等线性代数子问题可调用 `math-skill`，并注明借用了哪些结果；不可用时按 J 一致性手算。完成判据：每步有依据且可独立核验，符号推导在数值代入前完成。
+4. **验证（Verify）**：从 `modules/verification_engine.md` 选择最小充分验算集：通常包含 F 量纲与 B 回代，再加入至少一项独立的 L、C、D、E、I 或 J；每个不适用项写出物理原因。领域模块标为必做的 J 不可替代。逐条给出实际检查与 PASS/FAIL；失败则进入回溯修正协议。完成判据：所有已选检查 PASS，所有 N/A 均有理由，FAIL 0 项。
 5. **复核（Review，可选）**：用户要求高置信度或题目复杂时，按 `modules/review_engine.md` 做独立复核并附复核结论；不要求时跳过。完成判据：触发时 P1–P5 全部 PASS，或白纸重推后 FAIL 0 项。
 6. **作答（Answer）**：先执行所选模板的结构门禁（默认模板 A 六节，见 `modules/output_templates.md`）；再给出最终答案（加粗、含单位与适用条件），附一行验算摘要；列出本题真实易错点（无则不写）。完成判据：所选模板结构门禁通过，答案加粗、验算摘要与格式规则全部满足。
 
@@ -49,21 +61,17 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 
 ## 验证引擎（摘要）
 
-标准解答必查 **① F 量纲、② L 极限/特例、③ B 回代、④ C 守恒量（适用时）**；任何 FAIL 回退到最后一个通过的中间结果并从该点重推；禁止伪造 PASS（PASS = 实际执行的检查 + 可复核步骤）。完整方法、题型选择表与回溯协议见 `modules/verification_engine.md`。
+标准解答采用**最小充分验算集**：通常 F 与 B，加至少一个独立的 L/C/D/E/I/J；领域强制的 J 必须加入。任何 FAIL 回退到最后一个通过的中间结果并从该点重推；PASS 必须包含实际执行的检查和可复核步骤。完整方法、题型选择表与回溯协议见 `modules/verification_engine.md`。
 
 ## 输出规则
 
-- 公式优先用 `$$ ... $$` 块；行内公式用 `$...$` 仅限短符号。
-- 中文叙述 + 标准 LaTeX；剔除 emoji 及会导致 Overleaf 编译报错的字符；验证结果用 `PASS`/`FAIL` 纯文本。
-- 模板 A 固定六节标题：题意与图景、建模、推导、验算、答案、易错点；每节独立成节，禁止合并。
-- 验算节每条以 `①②③④`（可选 `⑤⑥`，本域必做 `⑦J`）开头；答案节用 Markdown `**...**` 显式加粗，`\boxed{}` 不作为替代。
-- 最终答案必须附一行验算摘要，例如：`已通过 ①②③④，FAIL 0 项`。
-- 输出可完整复制进 Overleaf 编译。
+- 默认使用中文 Markdown + 标准 LaTeX 公式；模板选择、结构门禁和验算摘要格式见 `modules/output_templates.md`。
+- 用户要求可编译文档时，使用该模块的 LaTeX 文档模式；不要混用 Markdown 与 LaTeX 文档标记。
 
 ## 诚实原则
 
-- 不编造定理、公式、或"显然成立"的推导步骤；不确定的中间步骤明确标注。
-- 验证不通过且无法修复时，如实说明，不得用"应验算通过"之类措辞掩盖。
+- 不确定的定理、公式或中间步骤明确标注，并说明怎样复核。
+- 验证无法完成或修复时，如实说明当前证据、缺失条件和可行的下一步。
 - 物理量全程携带单位；单位制（SI/CGS）在解析步骤显式声明。
 
 ## 模块索引
@@ -77,9 +85,10 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 | 电磁学 | `modules/electromagnetism.md` | 静电场/静磁场/矢量分析/电路/麦克斯韦基础/介质边界 |
 | 量子基础 | `modules/quantum_basics.md` | 定态薛定谔/算符/对易/一维系统/微扰与自旋入门 |
 | 错误预防 | `modules/error_prevention.md` | 跨域错误检查清单与陷阱表 |
-| 输出模板 | `modules/output_templates.md` | 标准解答/仅答案/解答检查模板与硬规则 |
+| 输出模板 | `modules/output_templates.md` | 模板选择、结构门禁、Markdown 与 LaTeX 文档模式 |
 | 符号计算 | `modules/computation.md` | 可选 SymPy/SciPy 复核配方（无依赖降级友好） |
 | 英文模块 | `modules/en/` 与 `SKILL.en.md` | 与中文版等价的英文翻译，规则与中文版一致 |
+| 示例索引 | `examples/INDEX.md` | 复杂/高风险题按题型选择一个示例 |
 | 示例 | `examples/` | 完整带验证的例题 |
 | 测试 | `tests/` | 用例断言（TC-XXX-NNN） |
 

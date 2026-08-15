@@ -4,7 +4,7 @@
 ![Examples](https://img.shields.io/badge/examples-20-blue)
 ![Tests](https://img.shields.io/badge/tests-18-blue)
 
-面向大学本科物理习题的 Codex/Claude 推导型技能：**分步推导 + 内置验证 + 中文叙述 + Overleaf 可编译输出**。
+面向大学本科物理习题的 Codex/Claude 推导型技能：**分步推导 + 内置验证 + 中文叙述 + LaTeX-ready 输出**。
 
 English version: [README.en.md](README.en.md)
 
@@ -25,7 +25,7 @@ English version: [README.en.md](README.en.md)
 - "解一维无限深势阱的定态薛定谔方程并验证归一化"
 - "帮我看看我写的这步对不对"（进入学生诊断模式）
 
-矩阵/特征值子问题可联动 Math.Skill（可选；无则按 J 一致性手算）。
+矩阵/特征值子问题可联动 `math-skill`（可选；无则按 J 一致性手算）。
 
 ## 目录结构
 
@@ -61,6 +61,7 @@ undergrad-physics-skill/
 - [x] v0.5.1：瘦身优化——跨域陷阱表去重、README/test_cases 精简
 - [x] v0.5.2：评审修复——⑦J 编号、步骤引用、法拉第指针、范围对齐、结构校验器、版权核实、5 个缺域例题、CI、英文模块同步、双许可
 - [x] v0.6：P0 完成；P1 微扰/自旋、D/H 范围声明、错误预防映射、CONTRIBUTING、CHANGELOG
+- [x] v0.6.1：英文模块母语化润色与验算策略同步
 - [ ] v1.0：正式发布（市场投稿、反馈闭环）
 
 ## 许可
@@ -82,7 +83,7 @@ undergrad-physics-skill/
 
 本技能的结构与验证方法受以下开源项目启发（均为独立实现，未复制原文；上游许可证已于 2026-08-14 核实，详见 [NOTICE](NOTICE)）：
 
-- [Math.Skill](https://github.com/Wholiver/Math.Skill) — 数学推理技能架构、验证引擎思路
+- `math-skill` — 可选的数学推理协作技能；不可用时按 J 一致性手算
 - [landau-mode](https://github.com/shaevitz/landau-mode) — 病理过滤与白纸重推的方法思路
 - [ScienceClaw physics-solver](https://github.com/beita6969/ScienceClaw) — 符号计算配方思路
 - [xiaozhi-skills](https://github.com/qizhitang/xiaozhi-skills) — 中文物理解题流程的图景建模思路

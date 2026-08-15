@@ -1,18 +1,18 @@
 ---
 name: undergrad-physics-skill
 version: 0.6.0
-description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): step-by-step derivations with mandatory F/L/B/C verification before final answers. Use when deriving equations of motion, solving field/circuit/Schrödinger problems, verifying a derivation, or diagnosing a student's attempted solution. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
+description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): derivations with a minimum sufficient verification set before final answers. Use for equations of motion, field/circuit/Schrödinger problems, derivation checks, or student-answer diagnosis. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
 ---
 
 # undergrad-physics-skill
 
-Undergraduate physics problem-solving skill: step-by-step derivation + built-in verification + Chinese narration + Overleaf-compilable output.
+Undergraduate physics problem-solving skill: step-by-step derivation + built-in verification + Chinese narration + LaTeX-ready output.
 
 > English modules under `modules/en/` are synced artifacts of the Chinese originals. Edit the Chinese modules first; update the English copies during release.
 
 ## Positioning
 
-A derivation-oriented skill for undergraduate physics problems (classical mechanics, electromagnetism, basic quantum mechanics). Every solution must follow **step-by-step derivation → multi-method independent verification → final answer only after verification passes**. When verification fails, roll back and fix; when verification is impossible, state so honestly — outputting an unverified "best guess" is forbidden.
+A derivation-oriented skill for undergraduate physics problems (classical mechanics, electromagnetism, basic quantum mechanics). Every solution follows **step-by-step derivation → minimum sufficient verification → final answer only after verification passes**. When verification cannot be completed, state the uncertainty, missing conditions, and next information needed.
 
 This skill has zero external dependencies: the verification flow is executed by reasoning itself (hand calculation / symbolic substitution / numerical sampling), without relying on any script, environment, or plugin. Optionally, when Python/SymPy is available in the environment and the user requests it, symbolic computation can be used for cross-checking (see `modules/computation.md`), but the skill works fully without it.
 
@@ -20,7 +20,7 @@ This skill has zero external dependencies: the verification flow is executed by 
 
 - **Classical mechanics**: Newtonian mechanics, Lagrangian mechanics, Hamiltonian mechanics, differential equations of motion, conserved quantities, small oscillations and normal modes, constrained systems, rigid-body basics (planar motion / rolling without slipping / collisions), non-inertial frames.
 - **Electromagnetism**: electrostatics, magnetostatics (vacuum-focused; linear media only at the boundary-condition level, no polarization/magnetization derivations), vector calculus (gradient/divergence/curl), potential and field strength, capacitance/inductance, circuits (RC/RL/RLC), basic applications of Maxwell's equations.
-- **Basic quantum mechanics**: time-independent Schrödinger equation, one-dimensional wells/barriers, harmonic oscillator, angular momentum and operators, commutation relations, introductory derivation of hydrogen energy levels.
+- **Basic quantum mechanics**: time-independent Schrödinger equation, one-dimensional wells/barriers, harmonic oscillator, angular momentum and operators, commutation relations, introductory derivation of hydrogen energy levels, non-degenerate perturbation theory and spin-1/2 basics.
 
 ## Out of Scope
 
@@ -30,14 +30,26 @@ This skill has zero external dependencies: the verification flow is executed by 
 - Pure lab-course content, computational physics programming tasks.
 - Workflows that only review independently without solving or diagnosing are out of scope.
 
+## Entry Routing
+
+| User intent | Entry |
+|---|---|
+| Full solution / derivation | Template A + core workflow |
+| Result only | Template B + minimum necessary verification |
+| Concept question | Template D + minimal example |
+| Check / diagnose an attempt | Template C/E + Student Diagnosis mode |
+| Compilable Overleaf document | Switch to LaTeX document mode on the entry above |
+
+Full template definitions live in `modules/output_templates.md`.
+
 ## Core Workflow
 
 Execute the following steps in order for every problem; proceed to the next step only after the completion criterion of the current step is met.
 
-1. **Parse**: extract the physical system — objects, degrees of freedom, constraints, coordinate system, unit system, initial/boundary conditions, known and unknown quantities; list implicit conditions (e.g., nonzero denominators, reality of energy, parameter ranges); if `examples/` contains a matching problem-type example, read its template structure and verification style first (format reference only — do not copy its answer). **When conditions are insufficient or the statement is ambiguous**: prefer asking the user to clarify missing key parameters; when reasonable assumptions can be made, state them explicitly and continue — fabricating numerical values not given in the problem is forbidden. Completion criterion: all the above items are explicitly listed, with no undeclared parameters or conditions.
+1. **Parse**: extract the physical system — objects, degrees of freedom, constraints, coordinate system, unit system, initial/boundary conditions, known and unknown quantities; list implicit conditions (e.g., nonzero denominators, reality of energy, parameter ranges). For a complex or high-risk problem, or when the user requests high confidence, use `examples/INDEX.md` to read **one** matching example for structure and verification style only. When conditions are insufficient, ask the key clarifying question; when a reasonable assumption is available, state it before continuing. Completion criterion: all the above items are explicitly listed, with no undeclared parameters or conditions.
 2. **Model**: choose the equation framework (Newton / Lagrange / Hamilton / Maxwell / Schrödinger) and explain the choice; write the explicit form of the Lagrangian, Hamiltonian, or equation system; confirm the applicability conditions of every theorem/law invoked. Completion criterion: equation framework, explicit expressions, and applicability conditions all present.
-3. **Derive**: step-by-step derivation, each step annotated with its justification; symbolic derivation first, numerical substitution last; at least once every 3–5 steps, run an F dimensional check or E numerical sampling and record the result inline; linear-algebra subproblems such as matrices, eigenvalues, matrix powers, and recurrences may be delegated to Math.Skill with a note of which results were borrowed (Math.Skill is an optional external skill — this skill does not depend on its existence); without Math.Skill, compute by hand per J consistency. Completion criterion: every step has a justification and is independently verifiable; symbolic derivation completed before numerical substitution.
-4. **Verify**: a standard solution must check F dimensions, L limit/special case, B back-substitution, C conserved quantities (when applicable), plus optional bonus items per problem type; give PASS/FAIL item by item; on failure, enter the backtracking correction protocol. Completion criterion: the verification gate passes — all four mandatory checks PASS or N/A (with reason), FAIL 0 items.
+3. **Derive**: step-by-step derivation, each step annotated with its justification; symbolic derivation first, numerical substitution last. At each key intermediate result, approximation/representation change, and before the final result, run the most appropriate quick check and record it inline. Linear-algebra subproblems may use `math-skill` with a note of borrowed results; otherwise compute by hand per J consistency. Completion criterion: every step has a justification and is independently verifiable; symbolic derivation completed before numerical substitution.
+4. **Verify**: select a minimum sufficient verification set from `modules/verification_engine.md`: normally F dimensions and B back-substitution, plus at least one independent L, C, D, E, I, or J check; record a physical reason for every N/A. A J check required by a domain module cannot be replaced. Give PASS/FAIL item by item; on failure, enter the backtracking correction protocol. Completion criterion: every selected check PASS, every N/A justified, FAIL 0 items.
 5. **Review (optional)**: when the user demands high confidence or the problem is complex, run an independent review per `modules/review_engine.md` and append the review conclusion; skip when not requested. Completion criterion: when triggered, P1–P5 all PASS, or a clean-sheet re-derivation yields FAIL 0 items.
 6. **Answer**: first execute the structural gate of the selected template (default Template A with six sections, see `modules/output_templates.md`); then give the final answer (bold, with units and applicability conditions) plus a one-line verification summary; list this problem's genuine pitfalls (omit if none). Completion criterion: the selected template's structural gate passes, and the answer bolding, verification summary, and formatting rules are all satisfied.
 
@@ -51,21 +63,17 @@ The default main flow is full problem solving (Template A). When the user asks t
 
 ## Verification Engine (Summary)
 
-A standard solution must check **① F dimensions, ② L limit/special case, ③ B back-substitution, ④ C conserved quantities (when applicable)**; any FAIL rolls back to the last passed intermediate result and re-derives from that point; fabricating PASS is forbidden (PASS = an actually executed check + re-checkable steps). The full methods, problem-type selection table, and backtracking protocol are in `modules/verification_engine.md`.
+A standard solution uses a **minimum sufficient verification set**: normally F and B plus one independent L/C/D/E/I/J check; add J whenever its domain requires it. Any FAIL rolls back to the last passed intermediate result and re-derives from that point; a PASS contains an actually executed, re-checkable step. The full methods, problem-type selection table, and backtracking protocol are in `modules/verification_engine.md`.
 
 ## Output Rules
 
-- Prefer `$$ ... $$` blocks for formulas; inline `$...$` only for short symbols.
-- Chinese narration + standard LaTeX; strip emoji and any characters that would break Overleaf compilation; verification results use plain-text `PASS`/`FAIL`.
-- Template A's six fixed section titles: 题意与图景 (Problem Restatement), 建模 (Modeling), 推导 (Derivation), 验算 (Verification), 答案 (Answer), 易错点 (Common Pitfalls); each section stands alone — no merging.
-- Each line of the 验算 section starts with `①②③④` (optional `⑤⑥`, domain-mandatory `⑦J`); the 答案 section uses explicit Markdown `**...**` bolding — `\boxed{}` is not a substitute.
-- The final answer must append a one-line verification summary, e.g.: `已通过 ①②③④，FAIL 0 项`.
-- Output must be fully copy-pasteable into Overleaf for compilation.
+- Use Chinese Markdown with standard LaTeX formulae by default; template selection, structural gates, and verification-summary formats are in `modules/output_templates.md`.
+- When the user requests a compilable document, use that module's LaTeX document mode; do not mix Markdown markers with LaTeX-document markup.
 
 ## Honesty Principles
 
-- Do not fabricate theorems, formulas, or "obviously true" derivation steps; mark uncertain intermediate steps explicitly.
-- When verification fails and cannot be fixed, state so honestly — do not mask it with wording like "should pass verification".
+- Mark uncertain theorems, formulae, or intermediate steps explicitly and say how to re-check them.
+- When verification cannot be completed or fixed, state the evidence, missing conditions, and a feasible next step.
 - Physical quantities carry units throughout; declare the unit system (SI/CGS) explicitly in the Parse step.
 
 ## Module Index
@@ -77,10 +85,11 @@ A standard solution must check **① F dimensions, ② L limit/special case, ③
 | Student Diagnosis | `modules/tutoring_mode.md` | Optional branch: check student attempts, locate errors and conceptual misconceptions |
 | Classical Mechanics | `modules/mechanics.md` | Domain protocols and common errors for Newton / Lagrange / Hamilton / small oscillations / conserved quantities / non-inertial frames |
 | Electromagnetism | `modules/electromagnetism.md` | Electrostatics / magnetostatics / vector calculus / circuits / Maxwell basics |
-| Quantum Basics | `modules/quantum_basics.md` | Time-independent Schrödinger / operators / commutators / one-dimensional systems |
+| Quantum Basics | `modules/quantum_basics.md` | Time-independent Schrödinger / operators / commutators / one-dimensional systems / perturbation and spin basics |
 | Error Prevention | `modules/error_prevention.md` | Cross-domain error checklist and pitfall tables |
-| Output Templates | `modules/output_templates.md` | Standard solution / answer-only / solution-check templates and hard rules |
+| Output Templates | `modules/output_templates.md` | Template selection, structural gates, Markdown and LaTeX document modes |
 | Symbolic Computation | `modules/computation.md` | Optional SymPy/SciPy cross-check recipes (graceful degradation without dependencies) |
+| Example Index | `examples/INDEX.md` | Pick one example by problem type for complex/high-risk work |
 | Examples | `examples/` | Complete worked examples with verification |
 | Tests | `tests/` | Test-case assertions (TC-XXX-NNN) |
 

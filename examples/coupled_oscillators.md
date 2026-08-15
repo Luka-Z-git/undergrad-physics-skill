@@ -75,7 +75,7 @@ $$
   - 特征值回代：$(K-\omega_1^2 M)\mathbf A_1 = \begin{pmatrix} k_c & -k_c \\ -k_c & k_c \end{pmatrix}\begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$，成立；$(K-\omega_2^2 M)\mathbf A_2 = \begin{pmatrix} -k_c & -k_c \\ -k_c & -k_c \end{pmatrix}\begin{pmatrix} 1 \\ -1 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$，成立。**PASS**。
   - M-正交：$\mathbf A_1^T M \mathbf A_2 = m(1\cdot 1 + 1\cdot(-1)) = 0$，两简正模式 $M$-正交。**PASS**。
 
-验算摘要：`已通过 ①②③④⑦，FAIL 0 项`
+验算：`①②③④⑦，FAIL 0 项`
 
 ## 答案
 

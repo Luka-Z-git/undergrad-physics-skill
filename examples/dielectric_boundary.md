@@ -45,7 +45,7 @@ $$
 - **④ C 守恒量**：N/A（静电场边界问题，无机械守恒量；能量密度 $u=\frac12\varepsilon E^2$ 可作交叉核对，本域非必查）。
 - **⑤ E 数值抽样**：$\varepsilon_1=\varepsilon_0$、$\varepsilon_2=4\varepsilon_0$、$\theta_1=30^\circ$：$\tan\theta_2=4\tan30^\circ\approx2.309$，$\theta_2\approx66.6^\circ$；代回 $E_1\sin\theta_1=E_2\sin\theta_2$ 与 $\varepsilon_1E_1\cos\theta_1=\varepsilon_2E_2\cos\theta_2$，两式数值一致。**PASS**。
 
-验算摘要：`已通过 ①②③④，FAIL 0 项（⑤ 已加做）`
+验算：`①②③④，FAIL 0 项（⑤ 已加做）`
 
 ## 答案
 

@@ -35,6 +35,6 @@ $$
 
 ## 6. 作答（Answer）
 
-按模板 A 六节输出，答案加粗并带一行验算摘要：`已通过 ①②③④，FAIL 0 项`。
+按模板 A 六节输出，答案加粗并带一行列出实际检查的验算摘要，例如：`验算：①F、②B、③L，FAIL 0 项`。
 
 完整示范见 [examples/rc_discharge.md](../examples/rc_discharge.md)。

@@ -67,7 +67,7 @@ $$
 - **⑦ J 一致性**：横波性双垂直 $\mathbf E\perp\mathbf k$ 且 $\mathbf E\perp\mathbf B$ 由两式独立推出，自洽；$|\mathbf E|=c|\mathbf B|$ 与 $\mathbf B_0=\mathbf k\times\mathbf E_0/\omega$ 取模结果一致。**PASS**。
 - **⑤ E 数值抽样**：$\mu_0=4\pi\times10^{-7},\ \varepsilon_0=8.854\times10^{-12}$ → $c\approx2.998\times10^8\ \mathrm{m/s}$，与真空中光速一致。**PASS**。
 
-验算摘要：`已通过 ①②③⑤⑦，④ N/A（坡印廷定理），FAIL 0 项`
+验算：`①②③⑤⑦，④ N/A（坡印廷定理），FAIL 0 项`
 
 ## 答案
 

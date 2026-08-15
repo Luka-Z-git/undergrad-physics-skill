@@ -49,7 +49,7 @@ $$
 - **③ B 回代**：把 $v=\sqrt{2gs(\sin\alpha-\mu\cos\alpha)}$ 代回功能原理，两边恒等；由 $a=g(\sin\alpha-\mu\cos\alpha)$ 与 $v^2=2as$ 重推得同一结果。**PASS**。
 - **④ C 守恒量**：初始 FAIL——裸用能量守恒得出错误速度；修正后能量关系为 $\Delta K=W_g+W_f$，机械能变化恰等于摩擦功 $-fs$，复核 PASS。**PASS**。
 
-验算摘要：`已通过 ①②③④，FAIL 0 项（含一次修复后 PASS）`
+验算：`①②③④，FAIL 0 项（含一次修复后 PASS）`
 
 ## 答案
 

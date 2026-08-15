@@ -83,7 +83,7 @@ $$
 - **⑤ E 数值抽样**（可选加分项）：取 $m = 1\,\mathrm{kg}$，$l = 1\,\mathrm{m}$，$g = 9.8\,\mathrm{m/s^2}$：$\omega = \sqrt{9.8} \approx 3.13\,\mathrm{s^{-1}}$，$T \approx 2.01\,\mathrm{s}$；代入 $\ddot{\theta} + (g/l)\sin\theta = 0$ 数值两端一致（误差 $\sim 10^{-3}$ 量级，来自小角近似）。**PASS**。
 - **⑥ I 独立方法**（可选加分项）：用能量守恒 $E = \frac{1}{2}ml^2\dot{\theta}^2 + mgl(1-\cos\theta)$ 求 $\dot\theta(\theta)$ 后对 $\theta$ 积分，小角下得同一周期 $2\pi\sqrt{l/g}$。**PASS**。
 
-验算摘要：`已通过 ①②③④，FAIL 0 项（⑤⑥ 已加做）`
+验算：`①②③④，FAIL 0 项（⑤⑥ 已加做）`
 
 ## 答案
 

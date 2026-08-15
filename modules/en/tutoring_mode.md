@@ -18,10 +18,10 @@ If the user only sends a problem with no intent to have their work checked, do n
 ## Flow
 
 1. **Get progress**: if the student has not pasted their work, ask in one sentence: "贴出你目前的作答，至少包含你已写出的方法/方程/推导/答案，并说明卡在哪一步（可选）。" (English gloss: Paste your current work, including at least the method/equations/derivation/answer you have written so far, and state which step you are stuck on (optional).)
-2. **Completeness check**: the four elements are method, equations, derivation, answer.
+2. **Completeness check**: look for the method, governing equations, derivation, and claimed answer.
    - Incomplete: directly state which element is missing and give the specific next thing to write (one sentence, without expanding into a full solution).
    - Complete: proceed to verification.
-3. **Verify and locate**: verify the student's results item by item using F dimension / L limit-special case / B back-substitution / C conserved quantity (where applicable); locate the first error (step + expression + cause); map it to the corresponding conceptual misconception (may cite `modules/error_prevention.md`); give the correct form and the reason.
+3. **Verify and locate**: select the minimum sufficient checks from `modules/verification_engine.md` (normally F + B plus one independent check); locate the first error (step + expression + cause), map it to the corresponding misconception, and give the corrected form with its reason.
 4. **Confirm understanding**: give one short question for the student to answer, confirming they understand rather than copy.
 5. **Loop**: the student revises and sends again; repeat steps 2–4; if still FAIL after two consecutive rounds, suggest switching back to Template A full solution or to independent review per `modules/review_engine.md`.
 

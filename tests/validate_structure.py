@@ -6,10 +6,10 @@
 "模板 A 结构门禁"与"格式硬规则"：
 
   1. 六节标题齐全且顺序正确：题意与图景、建模、推导、验算、答案、易错点
-  2. 验算节每条以 ①②③④（可选 ⑤⑥、本域必做 ⑦J）开头，无混合散文
+  2. 验算节含最小充分验算集：F、B（适用时）和一项独立检查
   3. 答案节含 **...** 显式加粗
-  4. 含一行验算摘要：已通过 ①②③④，FAIL 0 项（允许 N/A 与附加明细）
-  5. 无 emoji / 对勾叉号等 Overleaf 不兼容 Unicode 符号
+  4. 含一行列出实际检查的验算摘要，且 FAIL 0 项
+  5. 无 emoji / 对勾叉号等不适于 Markdown 技术答案的状态符号
   6. $$ 块配平
 
 用法：
@@ -57,21 +57,19 @@ def check_file(path):
     elif pos != sorted(pos):
         fails.append("节标题顺序错误，应为: " + " → ".join(REQUIRED_SECTIONS))
 
-    # 2. 验算节逐条编号
+    # 2. 最小充分验算集。F/B 通常必做；若不适用必须给理由。
     ver = extract_section(text, "验算", REQUIRED_SECTIONS)
     if ver is not None:
-        for mark, label in zip("①②③④", ["F", "L", "B", "C"]):
-            if mark not in ver:
-                fails.append(f"验算节缺 {mark}（{label}）")
-        bad_lines = [
-            ln for ln in ver.splitlines()
-            if ln.strip()
-            and not ln.lstrip().startswith(tuple(NUM_MARKS))
-            and not ln.lstrip().startswith(("#", "-", "|", "$", "验算摘要"))
-            and "已通过" not in ln
-        ]
-        if bad_lines:
-            fails.append(f"验算节存在无编号叙述行: {bad_lines[0].strip()[:40]}...")
+        check_lines = [ln for ln in ver.splitlines() if re.match(r"^\s*[-*]?\s*\**[" + NUM_MARKS + r"]", ln)]
+        labels = " ".join(check_lines)
+        if len(check_lines) < 3:
+            fails.append("验算节少于 3 项，未形成最小充分验算集")
+        for label in ("F", "B"):
+            if label not in labels and f"{label} N/A（" not in labels:
+                fails.append(f"验算节缺 {label} 检查或其 N/A 原因")
+        independent = any(label in labels for label in ("L", "C", "D", "E", "I", "J"))
+        if not independent:
+            fails.append("验算节缺独立检查（L/C/D/E/I/J）")
 
     # 3. 答案节显式加粗
     ans = extract_section(text, "答案", REQUIRED_SECTIONS)
@@ -79,8 +77,8 @@ def check_file(path):
         fails.append("答案节缺 **...** 显式加粗")
 
     # 4. 验算摘要行
-    if "已通过" not in text or "FAIL 0 项" not in text:
-        fails.append("缺验算摘要行（已通过 ①②③④，FAIL 0 项）")
+    if ("验算：" not in text and "验算摘要：" not in text) or "FAIL 0 项" not in text:
+        fails.append("缺验算摘要行（应列出实际检查并标明 FAIL 0 项）")
 
     # 5. Overleaf 不兼容字符
     bad = [c for c in BANNED_CHARS if c in text]

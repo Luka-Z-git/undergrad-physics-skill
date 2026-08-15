@@ -4,11 +4,11 @@
 
 **Electromagnetism**: electrostatics, magnetostatics, vector analysis, capacitance/inductance, circuit transients (RC/RL/RLC), foundations of Maxwell's equations. **Media are treated primarily as vacuum**; linear media are covered only at the level of boundary conditions (see the scope statement in SKILL.md). Macroscopic D/H forms are used only there; polarization/magnetization mechanisms are out of scope.
 
-(Standard subdomain structure as in mechanics.md)
+Each subdomain follows the structure used in `mechanics.md`: identifying features, modeling steps, a verification set, applicability conditions, and a common-errors table.
 
 ## 0. Method Selection Table
 
-Select the method according to the system's features; when multiple methods apply, choose the one with the shortest derivation and the most direct verification, and state the reason in one sentence in the modeling section.
+Choose the method from the system's features. If several methods apply, use the one that gives the shortest derivation and the clearest verification, and state the choice in one sentence in the Modeling section.
 
 | System Feature | Preferred Method | Reason for Choice | Domain-Specific Verification |
 |---|---|---|---|
@@ -50,7 +50,7 @@ $$
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); recommended additional: D, E, I, J.
+Recommended verification set: F + B + D or L; add E, I, or J when the field geometry calls for it.
 
 ### Applicability Conditions to Check
 
@@ -100,7 +100,7 @@ $$
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); recommended additional: I, E, J.
+Recommended verification set: F + B + L or I; add E or J when the field representation calls for it.
 
 ### Applicability Conditions to Check
 
@@ -149,7 +149,7 @@ $$
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); recommended additional: E, D.
+Recommended verification set: F + B + L or C; add E or D when useful.
 
 ### Applicability Conditions to Check
 
@@ -176,7 +176,7 @@ Problems of the "time-varying magnetic flux, moving conductors" type in the meth
 1. Induced EMF (fixed loop, time-varying magnetic field): $\mathcal{E}=-\dfrac{d}{dt}\displaystyle\int_S\mathbf B\cdot d\mathbf A$; the induced electric field is non-conservative and admits no global potential.
 2. Motional EMF (conductor moving in a magnetic field): $\mathcal{E}=\oint(\mathbf v\times\mathbf B)\cdot d\mathbf l$; the result must agree with the induced-EMF route (I independent-method strong check).
 3. Direction determined by Lenz's law: the induced effect opposes the change in flux; the minus sign cannot be omitted.
-4. Verification: in addition to the required F/L/B, the limits $\dot{\mathbf B}\to0$ or $v\to0$ should give $\mathcal E\to0$; the dimension is volts.
+4. Verification: use F + B + L or I; the limits $\dot{\mathbf B}\to0$ or $v\to0$ should give $\mathcal E\to0$, and the dimension must be volts.
 
 | Error | Correct |
 |---|---|
@@ -217,7 +217,7 @@ $$
 
 ### Verification Set
 
-Required: F, L, B (C when applicable); recommended additional: J, E, D.
+Recommended verification set: F + B + J or D; add E when a numerical or wave-amplitude check is useful.
 
 ### Applicability Conditions to Check
 

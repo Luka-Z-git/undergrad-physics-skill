@@ -6,7 +6,7 @@ This module defines the error-prevention rules that must be observed during deri
 
 1. **No fabrication**: do not invent theorems, formulas, or "obviously true" steps. Mark uncertain intermediate steps explicitly; do not mask them with vague wording.
 2. **Carry units throughout**: every physical quantity carries units; intermediate results must be dimensionally consistent with the context; declare the unit system (SI/CGS) explicitly in the Parse step and never mix systems during derivation.
-3. **Write out all steps**: write every algebraic transformation explicitly; no mental-math skipping; run at least one F dimensional check or E numerical sampling every 3–5 steps and record the result inline.
+3. **Write out all steps**: write every algebraic transformation explicitly; at each key intermediate result, approximation/representation change, and before the final result, run an appropriate quick check and record it inline.
 4. **Preconditions before theorems**: before invoking any law/theorem, verify that its applicability conditions hold (inertial frame, no dissipation, potential field, stationary state, small angle, etc.) and state them in the text.
 
 ## 1. Common Algebra and Calculus Errors in Physics
@@ -78,9 +78,9 @@ Domain-specific errors are not repeated here; they live in each domain module's 
 
 - [ ] Unit system declared and consistent throughout; final result's dimensions match the target physical quantity (F)
 - [ ] Applicability conditions of all invoked theorems/laws stated and satisfied
-- [ ] Template A mandatory checks executed with item-by-item PASS/FAIL: ①F dimensions ②L limit/special case ③B back-substitution ④C conserved quantities (when applicable); FAIL 0 items
+- [ ] Template A uses a minimum sufficient verification set: normally F + B plus one independent check; every N/A has a physical reason and FAIL 0 items
 - [ ] Template A six section titles complete and in correct order: 题意与图景 (Problem Restatement), 建模 (Modeling), 推导 (Derivation), 验算 (Verification), 答案 (Answer), 易错点 (Common Pitfalls); each section independent, no merging
-- [ ] Each 验算 line starts with ①②③④ (plus optional ⑤⑥, and domain-mandatory ⑦J); the 答案 section contains explicit `**...**` bolding (`\boxed{}` is not a substitute)
+- [ ] Each verification line is numbered and contains concrete evidence; any domain-mandatory J check is present; the Answer section contains explicit `**...**` bolding (`\boxed{}` is not a substitute)
 - [ ] Final answer includes units and parameter validity ranges (e.g., $\theta\ll1$, $v\ll c$)
 - [ ] Output contains no emoji, checkmark/cross, or other Unicode symbols; formulas use `$$ ... $$` blocks, paste-ready for Overleaf compilation
 - [ ] No wording such as "believe", "obviously", or "should pass verification" used in place of actual verification

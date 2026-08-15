@@ -47,7 +47,7 @@ $$
 - **③ B 回代**：$\theta(t)=Ae^{\gamma t}+Be^{-\gamma t}$ 代入 $\ddot\theta-(g/l)\theta=0$：$\gamma^2\theta-(g/l)\theta=0$，由 $\gamma^2=g/l$ 恒等。**PASS**。
 - **④ C 守恒量**：线性化能量 $E_{\rm lin}=\frac12ml^2\dot\theta^2-\frac12mgl\theta^2$；把 $\theta=Ae^{\gamma t}$ 代入得 $E_{\rm lin}=0$（用 $\gamma^2=g/l$），与解自洽。**PASS**。
 
-验算摘要：`已通过 ①②③④，FAIL 0 项（附：ω²<0，不输出周期公式）`
+验算：`①②③④，FAIL 0 项（附：ω²<0，不输出周期公式）`
 
 ## 答案
 

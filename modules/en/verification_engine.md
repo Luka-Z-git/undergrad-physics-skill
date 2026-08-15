@@ -21,7 +21,7 @@ Each PASS must be accompanied by a concrete, auditable check: dimensional substi
 
 ## Method Details
 
-### F Dimensional check (mandatory, every problem)
+### F Dimensional check (normally required)
 
 1. The analysis step declares the unit system (SI/CGS) and base dimensions $[M],[L],[T],[Q]$.
 2. **The final expression and every physically meaningful intermediate result must carry units**; purely mathematical stages (matrix inversion / eigenvalue computation / integration tricks / algebraic simplification) may have dimensionless intermediate steps, but units must be restored and the dimensions checked immediately once physical meaning is re-assigned.
@@ -66,24 +66,24 @@ Substitute the final solution $x(t)$, $\theta(t)$, $\psi(x)$ back into the origi
 
 ## Problem Type → Verification Combination Selection Table
 
-The mandatory checks for Template A (standard solution) are fixed as: ① F dimension ② L limit/special case ③ B back-substitution ④ C conserved quantity (when applicable), defined in `output_templates.md`. J consistency, when marked mandatory by a domain module, is presented in the verification section with the number ⑦, at the same level as ①–④ and must not be skipped. The table below supplements optional bonus items and domain emphasis for each problem type.
+Template A (standard solution) uses a minimum sufficient verification set: normally F dimensions and B back-substitution, plus at least one independent L, C, D, E, I, or J check; every N/A gives a physical reason. A J consistency check marked mandatory by a domain module must be included and cannot be replaced. The table below gives preferred combinations and domain emphasis.
 
-| Problem type | Optional bonus items | Domain emphasis |
+| Problem type | Recommended minimum sufficient set | Domain emphasis |
 |---|---|---|
-| Newtonian mechanics / force analysis | D, E, I | Domain (friction/static-friction conditions); B back-substitution for solutions of equations of motion |
-| Lagrangian/Hamiltonian derivations | I, E | Independent method (Newton re-solve) and numerical sampling are strong checks |
-| Small oscillations / normal modes | J, E, D | J mandatory in this domain: eigenvalue back-substitution, M-orthogonality |
-| Conserved-quantity problems | I, E | Independent-method re-solve to cross-check conserved quantities |
-| Electrostatic field / potential | D, E, I | Boundary-condition back-substitution and superposition |
-| Circuits RC/RL/RLC | E, D | Time-constant dimensions and $t\to0,\infty$ behavior |
-| Maxwell / vector analysis | J, E, D | Expand and compare both sides of identities |
-| Stationary Schrödinger / 1D potentials | J, E | J normalization; B back-substitution already mandatory |
-| Operators / commutation relations | J, E, D | J mandatory in this domain: verify by direct expansion |
-| Matrices / eigenvalues / recurrences | J, E, I | J mandatory in this domain: trace/determinant/back-substitution/reconstruction |
+| Newtonian mechanics / force analysis | F + B + D or L | Domain (friction/static-friction conditions); B back-substitution for solutions of equations of motion |
+| Lagrangian/Hamiltonian derivations | F + B + I or C | Independent method (Newton re-solve) and conservation are strong checks |
+| Small oscillations / normal modes | F + B + J | J mandatory in this domain: eigenvalue back-substitution, M-orthogonality |
+| Conserved-quantity problems | F + B + C or I | Independent-method re-solve to cross-check conserved quantities |
+| Electrostatic field / potential | F + B + D or L | Boundary-condition back-substitution and superposition |
+| Circuits RC/RL/RLC | F + B + L or C | Time-constant dimensions and $t\to0,\infty$ behavior |
+| Maxwell / vector analysis | F + B + J or D | Expand and compare both sides of identities |
+| Stationary Schrödinger / 1D potentials | F + B + J | J normalization; B back-substitution already mandatory |
+| Operators / commutation relations | F + B + J | J mandatory in this domain: verify by direct expansion |
+| Matrices / eigenvalues / recurrences | F + B + J | J mandatory in this domain: trace/determinant/back-substitution/reconstruction |
 
 ## Backtrack-and-Fix Protocol
 
-When verification FAILs:
+When verification fails:
 
 1. **Record the failure**: which method, which step, the specific discrepancy.
 2. **Backtrack**: locate the last intermediate result that passed; all work after it is considered suspect.
@@ -102,7 +102,7 @@ When the FAIL occurs only in the last 1–2 steps of the derivation (e.g., a sig
 
 - Redo only the FAILing steps and their direct predecessors;
 - Keep all previously passed intermediate results; do not mark them as "suspect";
-- After the local fix, the full set of four mandatory checks (F/L/B/C) must still be executed on the final answer.
+- After the local fix, rerun the selected minimum sufficient verification set on the final answer.
 
 **Trigger conditions, all required simultaneously**: (a) the FAIL occurs in steps beyond 80% of the derivation; (b) all preceding intermediate results have passed at least two independent verifications.
 
@@ -125,24 +125,24 @@ The following problem types are automatically tagged as "complex"; at step 6 of 
 When lightweight back-substitution or the cost stop-loss is triggered, note it in the verification summary:
 
 ```
-已通过 ①②③④，FAIL 0 项（⑥ 成本止损：重推路径超 150%，切换至 I 独立方法后 PASS）
+验算：①F、②B、③I，FAIL 0 项（⑥ 成本止损：重推路径超 150%，切换至 I 独立方法后 PASS）
 ```
-(English gloss: Passed ①②③④, FAIL 0 items (⑥ cost stop-loss: re-derivation path exceeded 150%, PASS after switching to independent method I))
+(English gloss: Verification ①F, ②B, ③I passed; FAIL 0 items. The ⑥ cost stop-loss switched to independent method I after the re-derivation path exceeded 150%.)
 
 Or:
 
 ```
-已通过 ①②③④，FAIL 0 项（⑥a 轻量回代：仅修正第 N 步符号错误）
+验算：①F、②B、③L，FAIL 0 项（⑥a 轻量回代：仅修正第 N 步符号错误）
 ```
-(English gloss: Passed ①②③④, FAIL 0 items (⑥a lightweight back-substitution: only fixed the sign error in step N))
+(English gloss: Verification ①F, ②B, ③L passed; FAIL 0 items. ⑥a records a lightweight back-substitution fix at step N.)
 
 ## Verification Summary Format
 
 A one-line summary must be appended at the end of the final answer, in the format:
 
 ```
-已通过 ①②③④，FAIL 0 项
+验算：①F、②B、③L，FAIL 0 项
 ```
-(English gloss: Passed ①②③④, FAIL 0 items)
+(English gloss: Verification ①F, ②B, ③L passed; FAIL 0 items.)
 
-Details may be included, e.g.: `已通过 ①F 量纲 ②L 极限(ω→0 退化为单摆) ③B 回代 ④C 守恒，FAIL 0 项` (English gloss: Passed ①F dimension ②L limit (reduces to simple pendulum as ω→0) ③B back-substitution ④C conservation, FAIL 0 items). If an item FAILed and was then fixed, write `修复后 PASS` (fixed, then PASS); when ④ is not applicable (no conserved quantity, dissipation, broken symmetry), write `④ N/A（原因）` (④ N/A (reason)).
+Details may be included, e.g.: `验算：①F 量纲 ②B 回代 ③L 极限(ω→0 退化为单摆)，FAIL 0 项` (English gloss: Verification: ①F dimension ②B back-substitution ③L limit, FAIL 0 items). If an item FAILed and was then fixed, write `修复后 PASS` (fixed, then PASS); write `N/A（原因）` for an inapplicable item.

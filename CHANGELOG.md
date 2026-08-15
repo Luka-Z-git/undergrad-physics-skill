@@ -2,6 +2,13 @@
 
 本项目提交信息遵循 [Conventional Commits](https://www.conventionalcommits.org/) 风格（feat/fix/docs/refactor/chore），本文件由人工维护。
 
+## v0.6.1 (unreleased)
+
+### Changed
+
+- 英文模块完成母语化润色，并与中文模块同步最小充分验算策略、示例索引和 LaTeX 文档模式
+- README、CONTRIBUTING 与测试说明同步新的验算门禁
+
 ## v0.6.0 (unreleased)
 
 ### Added

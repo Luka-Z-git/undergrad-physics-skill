@@ -6,7 +6,7 @@
 
 A Codex/Claude skill for solving undergraduate physics problems with
 step-by-step derivations, built-in verification, Chinese explanations, and
-Overleaf-ready output.
+LaTeX-ready output.
 
 Covers: theoretical mechanics, electromagnetism, and basic quantum
 mechanics (v0.6.0).
@@ -21,12 +21,13 @@ A quick-start demo is available in [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEM
   (optional) -> Answer.
 - **Built-in verification**: 8 methods (F dimensional analysis / D domain /
   B back-substitution / C conservation / L limiting cases / E numerical
-  sampling / I independent method / J consistency). Template A requires
-  F, L, B, and C (when applicable); each PASS must include a re-checkable
-  step; failures trigger the backtrack protocol.
-- **Chinese + LaTeX**: display formulas use `$$ ... $$`; output can be
-  pasted into Overleaf; no emoji or Overleaf-incompatible characters.
-- **Optional enhancements**: Math.Skill for linear algebra, and
+  sampling / I independent method / J consistency). Template A normally uses
+  F + B plus one independent check; domain-mandatory J checks cannot be
+  skipped. Each PASS must include a re-checkable step; failures trigger the
+  backtrack protocol.
+- **Chinese + LaTeX**: display formulas use `$$ ... $$`; request LaTeX
+  document mode when a compilable Overleaf document is needed.
+- **Optional enhancements**: `math-skill` for linear algebra, and
   Python/SymPy/SciPy recipes for machine cross-checks. Neither is required.
 - **Optional review engine**: pathology filter and blank-paper restart for
   high-confidence requests.
@@ -48,11 +49,11 @@ Ask a physics problem directly, for example:
 
 - "Use the Lagrangian method to derive the equations of motion of a double pendulum."
 - "Derive the cyclotron motion of a charged particle in a uniform magnetic field."
-- "Solve the stationary Schrodinger equation for a one-dimensional infinite square well and verify normalization."
+- "Solve the stationary Schrödinger equation for a one-dimensional infinite square well and verify normalization."
 - "Check my work: is this step correct?" (enters student diagnosis mode)
 
 Matrix, eigenvalue, matrix-power, and recurrence subproblems may optionally
-use Math.Skill; without it, use the J consistency checks by hand.
+use `math-skill`; without it, use the J consistency checks by hand.
 
 ## Scope
 
@@ -80,10 +81,11 @@ workflows, lab-only content, and computational physics programming.
 | I | Independent method | Re-solve with a second framework |
 | J | Consistency | Matrix identities, normalization, commutators |
 
-Hard rules: Template A requires F, L, B, and C (when applicable); any FAIL
-triggers the backtrack protocol; fake PASS is forbidden; after two failed
-corrections, switch to an independent route or explicitly state that no
-verified answer can be given. The authoritative definitions live in
+Hard rules: Template A uses a minimum sufficient verification set—normally
+F + B plus one independent check—and every N/A must have a physical reason.
+Any FAIL triggers the backtrack protocol; after two failed corrections,
+switch to an independent route or explicitly state that no verified answer
+can be given. The authoritative definitions live in
 `modules/verification_engine.md`.
 
 ## Repository Layout
@@ -124,7 +126,8 @@ undergrad-physics-skill/
 - [x] v0.5.2: review fixes — J numbering as ⑦, step references, Faraday
   pointer, scope alignment, structural validator, license verification
 - [x] v0.6: P0 complete; P1 perturbation/spin, D/H scope, error-prevention mapping, CONTRIBUTING, CHANGELOG
-- [ ] v1.0: English polish, formal release
+- [x] v0.6.1: English module polish and verification-policy synchronization
+- [ ] v1.0: formal release
 
 ## License
 
@@ -153,8 +156,8 @@ without copying their source text.
 
 ## Credits
 
-- [Math.Skill](https://github.com/Wholiver/Math.Skill) - mathematical
-  reasoning skill architecture and verification engine ideas
+- `math-skill` - optional mathematical-reasoning collaboration skill; use J
+  consistency checks by hand when it is unavailable
 - [landau-mode](https://github.com/shaevitz/landau-mode) - pathology filter
   and blank-paper restart methodology
 - [ScienceClaw physics-solver](https://github.com/beita6969/ScienceClaw) -

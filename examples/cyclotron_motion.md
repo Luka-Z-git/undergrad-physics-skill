@@ -57,7 +57,7 @@ $$
 - **⑤ E 数值抽样**（可选加分项）：质子 $m=1.67\times10^{-27}\,\mathrm{kg}$、$q=1.6\times10^{-19}\,\mathrm{C}$、$B=0.5\,\mathrm{T}$、$v=3\times10^6\,\mathrm{m/s}$：$r\approx0.0626\,\mathrm{m}$，$T\approx1.31\times10^{-7}\,\mathrm{s}$。**PASS**。
 - **⑥ I 独立方法**（可选加分项）：把 $\mathbf v=(v_x,v_y,0)$ 代入运动方程，解分量 ODE 得 $(x,y)$ 为圆轨道，半径同 $mv/(qB)$。**PASS**。
 
-验算摘要：`已通过 ①②③④，FAIL 0 项（⑤⑥ 已加做）`
+验算：`①②③④，FAIL 0 项（⑤⑥ 已加做）`
 
 ## 答案
 
