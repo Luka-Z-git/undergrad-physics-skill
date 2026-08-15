@@ -144,6 +144,11 @@ maximizes reuse. Publishing this repository constitutes public disclosure
 and termination clause; the authors do not assert patents over the methods
 described here.
 
+**Attribution**: when reusing or adapting prose, include: `Text content:
+undergrad-physics-skill contributors, licensed under CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/). If modified, indicate
+changes.`
+
 ## Reporting Issues
 
 Found a wrong answer, skipped verification, or a formatting problem? Open an issue:

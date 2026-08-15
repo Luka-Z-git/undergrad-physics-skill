@@ -74,6 +74,8 @@ undergrad-physics-skill/
 
 许可与专利：本项目公开即构成 prior art；脚本按 Apache-2.0 使用时附带标准专利授权与终止条款（见 LICENSE-APACHE）；作者不主张本仓库方法的专利。
 
+**如何署名**：复用或改编文本时使用：`文本内容：undergrad-physics-skill contributors，采用 CC BY 4.0 许可（https://creativecommons.org/licenses/by/4.0/）。如已修改，请注明修改。`
+
 ## 发现问题？
 
 发现解题错误、验证被跳过或格式问题，请提交 Issue：
