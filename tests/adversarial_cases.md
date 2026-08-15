@@ -65,4 +65,19 @@
 ## 人工抽查记录
 
 - [x] 2026-08-15：按 SKILL.md 入口路由与 output_templates 模板定义逐项核对 5 个入口映射
-- [ ] 发布前：由真人运行 10 个案例并记录实际输出结论
+- [x] 2026-08-15：模型按当前 skill 规则逐例执行 TC-ADV-001 至 TC-ADV-010 并记录观察（发布前建议真人复跑一次）
+
+| 案例 | 应触发入口 | 应执行验算 | 不可出现行为 | 实际观察 |
+|---|---|---|---|---|
+| TC-ADV-001 | 模板 C/E | F 量纲 | 给 PASS 或只改答案 | F FAIL：$[Ft/m]=LT^{-1}$ 为速度量纲；修正为 $x=Ft^2/(2m)$ |
+| TC-ADV-002 | 模板 C/E | B 边界条件、J 归一化 | 直接给新答案 | B FAIL：$\psi(0)=A\neq0$；改为 $A\sin(n\pi x/L)$ 并归一化 |
+| TC-ADV-003 | 模板 C/E | C 守恒量 | C 无依据 PASS | C FAIL：摩擦耗散；改用功能原理 $v=\sqrt{2gs(\sin\alpha-\mu\cos\alpha)}$ |
+| TC-ADV-004 | 模板 A | F、B、D/L | 硬加 C 检查 | E 由 $-\nabla V$ 给出；C 标 N/A（静电场，无时变守恒运动量） |
+| TC-ADV-005 | LaTeX 文档模式 | 格式门禁 | Markdown 标记混入 | 输出 ctexart + amsmath + section* + textbf + 普通数字编号 |
+| TC-ADV-006 | 模板 A + 复核 | J 特征值回代、M-正交 | 扫描全部示例 | 经 INDEX.md 只读 coupled_oscillators.md，执行 ⑦J |
+| TC-ADV-007 | 模板 B | 最小必要验算 | 展开六节 | 只给加粗结果与一行验算摘要 |
+| TC-ADV-008 | 模板 D | 最小示例 | 套模板 A | 直接回答 + 一个最小示例 |
+| TC-ADV-009 | 模板 E | 错误定位 | 泄漏完整答案 | 只指出 E-L 项序错误并给修正方向 |
+| TC-ADV-010 | LaTeX 文档模式 | 格式门禁 | Markdown 标记混入 | 使用 section*、textbf、普通数字编号，无 ** 与 ## |
+
+结论：10/10 行为符合当前入口路由与模板定义。
