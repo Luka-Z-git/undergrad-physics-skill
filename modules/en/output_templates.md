@@ -142,6 +142,6 @@ After the Parse phase completes and before modeling begins, assess problem compl
 
 **Discipline**:
 - Declare the complexity assessment in one sentence at the end of the Parse step, e.g., "本题评估为：中等（双自由度耦合，推导约 6 步）" (assessed as: medium — two coupled DOF, ~6 derivation steps).
-- Be concise by default: simple problems use ≤3 checks and a few lines; medium ≤5; complex ≤5; do not add equivalent matrix forms or SymPy checks by default.
+- Be concise by default: simple problems use ≤3 checks and a few lines; medium ≤5; complex ≤5; do not add equivalent matrix forms or SymPy checks by default; output only what the problem asks for, omitting unrequested general solutions/normal coordinates/equivalent forms; reviews appear as a P1–P5 summary.
 - The compact form for simple problems retains concrete evidence for every selected check and does not require inapplicable checks.
 - When the user explicitly requests a "detailed solution" / "complete steps", ignore the automatic grading and always output to the complex-problem standard.

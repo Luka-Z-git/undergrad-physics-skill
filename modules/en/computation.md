@@ -2,6 +2,8 @@
 
 This module provides **optional** cross-check recipes; it is not part of the main flow. Use it only when **Python plus SymPy/SciPy is available and the user requests it**.
 
+**Ignored by default**: without an explicit user request, do not invoke Python/SymPy or claim in the output that SymPy verified the work.
+
 **Rule**: output from these recipes is cross-check evidence only; it cannot replace the main flow's PASS/FAIL records. If it disagrees with a hand calculation, follow the Backtrack-and-Fix Protocol.
 
 ## Recipe Overview

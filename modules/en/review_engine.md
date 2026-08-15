@@ -10,6 +10,8 @@ The review has no external dependencies and invokes no scripts. For optional sym
 - The problem is complex, or standard verification has failed and been repaired (even if it passed after the fix).
 - The user provides an existing solution to be audited (Template C may first use this protocol to locate errors).
 
+Default output: a P1–P5 itemized summary plus a one-line verdict; no unrelated expansion.
+
 ## 2. Pathology Filter
 
 Check the entire derivation in order; any FAIL records a pathology:
@@ -26,7 +28,7 @@ For each FAIL, record the **step where it was found, the specific discrepancy, a
 
 ## 3. Blank-Paper Restart
 
-When the Pathology Filter finds a FAIL:
+Blank-paper restart is not run by default; run it only when the user explicitly asks or the Pathology Filter finds a FAIL. When it runs:
 
 1. Discard all work from the first suspect intermediate result onward; patching signs locally is forbidden.
 2. Re-derive from the last complete intermediate result that passed checking (if none, return to modeling).
