@@ -29,6 +29,7 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 - 科研工作流：论文复现、arXiv 阅读、多智能体研究流水线。
 - 纯实验课内容、计算物理编程任务。
 - 仅做独立审查而不解题也不诊断的工作流不在范围。
+- 遇到范围外题目（热学/光学/统计物理/等离子体等），先明确声明不在本技能范围；用户确认继续时才作答，否则不硬解。
 
 ## 入口路由
 

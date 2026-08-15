@@ -31,6 +31,7 @@ This skill has zero external dependencies: the verification flow is executed by 
 - Research workflows: paper reproduction, arXiv reading, multi-agent research pipelines.
 - Pure lab-course content, computational physics programming tasks.
 - Workflows that only review independently without solving or diagnosing are out of scope.
+- When a problem is out of scope (thermodynamics, optics, statistical physics, plasma physics, etc.), state clearly that it is outside the skill's scope first; solve it only if the user confirms, otherwise do not force a solution.
 
 ## Entry Routing
 
