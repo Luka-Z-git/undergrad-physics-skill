@@ -12,3 +12,11 @@ Thumbs.db
 
 # Workspace memory (assistant-local, not shipped)
 .workbuddy/
+
+# Secrets (defensive)
+.env
+.env.*
+*.pem
+*.key
+*.p12
+secrets*
