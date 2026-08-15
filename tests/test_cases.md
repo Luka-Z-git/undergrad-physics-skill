@@ -1,6 +1,6 @@
 # 测试用例 (Test Cases)
 
-本文件定义 `undergrad-physics-skill` v0.6.0 的行为断言。用例按 `TC-XXX-NNN` 格式编号。
+本文件定义 `undergrad-physics-skill` v0.7.0 的行为断言。用例按 `TC-XXX-NNN` 格式编号。
 
 约定：验证结果必须为 `PASS`/`FAIL` 纯文本；输出不得含 emoji、Overleaf 不兼容字符。
 

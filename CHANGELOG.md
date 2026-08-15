@@ -2,14 +2,7 @@
 
 本项目提交信息遵循 [Conventional Commits](https://www.conventionalcommits.org/) 风格（feat/fix/docs/refactor/chore），本文件由人工维护。
 
-## v0.6.1 (unreleased)
-
-### Changed
-
-- 英文模块完成母语化润色，并与中文模块同步最小充分验算策略、示例索引和 LaTeX 文档模式
-- README、CONTRIBUTING 与测试说明同步新的验算门禁
-
-## v0.6.0 (unreleased)
+## v0.7.0 (unreleased)
 
 ### Added
 
@@ -22,12 +15,18 @@
 - 量子模块：非简并微扰论与自旋 1/2 入门
 - 电磁模块：宏观 D/H 形式与线性介质范围声明
 - CHANGELOG 与 PR 模板
+- 顶层入口路由（SKILL.md）与示例索引 `examples/INDEX.md`
+- LaTeX 文档模式
+- 对抗行为案例 10 个与抽查记录
 
 ### Changed
 
+- 验算政策收敛为最小充分验算集：通常 F + B + 一项独立检查，领域必做 J；验证引擎为唯一来源
+- 英文模块完成母语化润色，并与中文模块同步验算策略、示例索引与 LaTeX 文档模式
 - 许可文档与 NOTICE/README 对齐（MIT + CC BY 4.0），记录许可决策
 - `error_prevention.md` 增加跨域陷阱映射表，sanity check 绑定 F/E
 - CONTRIBUTING 细化：例题 PR 模板、风格指南、新增模块流程、TC 命名规范
+- README、CONTRIBUTING 与测试说明同步新的验算门禁
 
 ## v0.5.2 - 2026-08-14
 

@@ -9,7 +9,7 @@ step-by-step derivations, built-in verification, Chinese explanations, and
 LaTeX-ready output.
 
 Covers: theoretical mechanics, electromagnetism, and basic quantum
-mechanics (v0.6.0).
+mechanics (v0.7.0).
 
 A quick-start demo is available in [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEMO.md).
 
@@ -125,8 +125,7 @@ undergrad-physics-skill/
   compaction
 - [x] v0.5.2: review fixes — J numbering as ⑦, step references, Faraday
   pointer, scope alignment, structural validator, license verification
-- [x] v0.6: P0 complete; P1 perturbation/spin, D/H scope, error-prevention mapping, CONTRIBUTING, CHANGELOG
-- [x] v0.6.1: English module polish and verification-policy synchronization
+- [x] v0.7: minimum sufficient verification, entry routing, LaTeX document mode, example index, adversarial cases and spot-check; includes all v0.6 P0/P1 work
 - [ ] v1.0: formal release
 
 ## License

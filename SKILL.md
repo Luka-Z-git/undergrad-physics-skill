@@ -1,6 +1,6 @@
 ---
 name: undergrad-physics-skill
-version: 0.6.0
+version: 0.7.0
 description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): derivations with a minimum sufficient verification set before final answers. Use for equations of motion, field/circuit/Schrödinger problems, derivation checks, or student-answer diagnosis. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
 ---
 
