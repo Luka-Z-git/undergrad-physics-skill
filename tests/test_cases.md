@@ -1,6 +1,6 @@
 # 测试用例 (Test Cases)
 
-本文件定义 `undergrad-physics-skill` v0.7.0 的行为断言。用例按 `TC-XXX-NNN` 格式编号。
+本文件定义 `undergrad-physics-skill` v0.8.0 的行为断言。用例按 `TC-XXX-NNN` 格式编号。
 
 约定：验证结果必须为 `PASS`/`FAIL` 纯文本；输出不得含 emoji、Overleaf 不兼容字符。
 
@@ -14,7 +14,7 @@ python tests/validate_structure.py <answer.md>
 
 TC-NEW-001 · TC-TUT-001 · TC-ELE-001 · TC-QNT-001
 
-核心流程或验证引擎变更后，另运行 `adversarial_cases.md` 的 TC-ADV-001 至 TC-ADV-006；这些用例检验错误能否被实际验算捕获，而不只检查输出结构。
+核心流程或验证引擎变更后，另运行 `adversarial_cases.md` 的 TC-ADV-001 至 TC-ADV-012；这些用例检验错误能否被实际验算捕获，而不只检查输出结构。
 
 ## 用例清单
 

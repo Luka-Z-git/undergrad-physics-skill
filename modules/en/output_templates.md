@@ -105,7 +105,7 @@ Rules:
 5. **Copy-paste readiness**: default Markdown output is readable and reuses its formulae directly; when a compilable document is requested, switch to the LaTeX document mode below. Do not treat Markdown markers as LaTeX.
 6. **Length**: every derivation step independently verifiable, no skipped steps; be concise by default and delete all sentences irrelevant to solving the problem unless the user asks for detail.
 7. **Structural gate**: Template A must satisfy all four: the six fixed section titles, standalone sections, a minimum sufficient verification set, and `**...**` bolding in 答案; restructure before answering if any is unmet.
-8. **Tool discipline**: without an explicit user request, do not invoke SymPy/Python, numerical-integration scripts, or other external tools, and do not claim they verified the answer.
+8. **Tool gate (L1–L4)**: L1 simple problems are hand calculation only; L2 medium problems may run one symbolic cross-check when available; L3 complex problems auto-upgrade to one with the tool source noted; L4 high-confidence follows `review_engine.md`. Tool calls must really run; never claim "verified" unless a tool executed.
 
 ## Counter-examples (forbidden output)
 
@@ -138,10 +138,10 @@ After the Parse phase completes and before modeling begins, assess problem compl
 |---|---|---|
 | **Simple** | Derivation ≤ 3 steps; single degree of freedom; standard problem types (constant-force motion, small-angle pendulum, RC discharge, infinite square well) | Keep Template A's six sections separate but make each concise; omit 易错点 if none |
 | **Medium** | Derivation 4–10 steps; 1–2 degrees of freedom; involves choices/judgments (method selection, coordinate choice) | Standard Template A with all six sections |
-| **Complex** | Derivation > 10 steps; coupled multi-DOF systems (double pendulum, coupled oscillators); or user demands high confidence | Standard Template A + optional review (`review_engine.md` P1–P5); review conclusion appended after the answer |
+| **Complex** | Derivation > 10 steps; coupled multi-DOF systems (double pendulum, coupled oscillators); or user demands high confidence | Standard Template A + L3 automatic symbolic check (when available) + optional review (`review_engine.md` P1–P5); review conclusion appended after the answer |
 
 **Discipline**:
 - Declare the complexity assessment in one sentence at the end of the Parse step, e.g., "本题评估为：中等（双自由度耦合，推导约 6 步）" (assessed as: medium — two coupled DOF, ~6 derivation steps).
-- Be concise by default: simple problems use ≤3 checks and a few lines; medium ≤5; complex ≤5; do not add equivalent matrix forms or SymPy checks by default; output only what the problem asks for, omitting unrequested general solutions/normal coordinates/equivalent forms; reviews appear as a P1–P5 summary. For multi-part or very complex problems, answer section by section with the conclusion first; keep the default total within about 120 lines and never return an empty answer.
+- Be concise by default: simple problems use ≤3 checks and a few lines; medium ≤5; complex ≤5; do not add equivalent matrix forms; simple/medium problems do not auto-run SymPy, and complex problems only add one L3 tool line when auto-upgraded; output only what the problem asks for, omitting unrequested general solutions/normal coordinates/equivalent forms; reviews appear as a P1–P5 summary. For multi-part or very complex problems, answer section by section with the conclusion first; keep the default total within about 120 lines and never return an empty answer.
 - The compact form for simple problems retains concrete evidence for every selected check and does not require inapplicable checks.
 - When the user explicitly requests a "detailed solution" / "complete steps", ignore the automatic grading and always output to the complex-problem standard.

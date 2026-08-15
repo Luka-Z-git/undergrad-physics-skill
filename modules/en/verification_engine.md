@@ -17,7 +17,7 @@ This module defines 8 verification methods (F/D/B/C/L/E/I/J), a problem-type sel
 
 ## PASS Criteria
 
-Each PASS must be accompanied by a concrete, auditable check: dimensional substitution, a limit expression, back-substitution identity, conserved-quantity values, or numerical sampling; a purely conclusory PASS (e.g., merely writing "dimension correct") counts as incomplete and is treated as FAIL, triggering the Backtrack-and-Fix Protocol. Fabricating PASS is forbidden. Without an explicit user request, do not invoke Python/SymPy or claim that an external tool verified the work; verification is performed by hand in reasoning. When symbolic cross-checks are requested, run them once and state the source.
+Each PASS must be accompanied by a concrete, auditable check: dimensional substitution, a limit expression, back-substitution identity, conserved-quantity values, or numerical sampling; a purely conclusory PASS (e.g., merely writing "dimension correct") counts as incomplete and is treated as FAIL, triggering the Backtrack-and-Fix Protocol. Fabricating PASS is forbidden. Tool calls follow the L1–L4 gate: simple problems forbid tools; medium problems allow one symbolic cross-check; complex problems auto-upgrade once when available; fall back to hand calculation and say so when tools are unavailable. Never claim external-tool verification unless a tool actually ran; when the user explicitly asks for a symbolic cross-check, run it once regardless of difficulty and state the source.
 
 ## Method Details
 

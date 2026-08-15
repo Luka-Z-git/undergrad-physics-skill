@@ -2,7 +2,7 @@
 
 This module is an **optional** review protocol; it is not part of the default flow. Use it after a standard solution to audit the full derivation, locate suspect steps, and decide whether a complete re-derivation is needed. Trigger it when the user requests high confidence, the problem is complex, or standard verification has failed and been repaired.
 
-The review has no external dependencies and invokes no scripts. For optional symbolic checks, see `computation.md`.
+The review is executed by reasoning by default; complex problems may use one symbolic/numerical cross-check under the L3 gate from `computation.md`, falling back to hand calculation when tools are unavailable.
 
 ## 1. When to Use
 

@@ -8,15 +8,16 @@ A Codex/Claude skill for solving undergraduate physics problems with
 step-by-step derivations, built-in verification, Chinese explanations, and
 LaTeX-ready output.
 
-Covers: theoretical mechanics, electromagnetism, and basic quantum
-mechanics (v0.7.0).
+Current coverage: theoretical mechanics, electromagnetism, and basic
+quantum mechanics.
 
 A quick-start demo is available in [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEMO.md).
 
 ## Features
 
 - **Zero hard dependencies**: pure Markdown skill; verification is executed
-  by reasoning, not by scripts.
+  by reasoning by default. Optional Python/SymPy cross-checks can
+  auto-upgrade on complex problems when available.
 - **Step-by-step workflow**: Parse -> Model -> Derive -> Verify -> Review
   (optional) -> Answer.
 - **Built-in verification**: 8 methods (F dimensional analysis / D domain /
@@ -28,7 +29,7 @@ A quick-start demo is available in [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEM
 - **Chinese + LaTeX**: display formulas use `$$ ... $$`; request LaTeX
   document mode when a compilable Overleaf document is needed.
 - **Optional enhancements**: `math-skill` for linear algebra, and
-  Python/SymPy/SciPy recipes for machine cross-checks. Neither is required.
+  Python/SymPy/SciPy recipes for L2–L3 machine cross-checks. None are required.
 - **Optional review engine**: pathology filter and blank-paper restart for
   high-confidence requests.
 - **Optional student diagnosis mode**: checks a student's work, directly
@@ -64,9 +65,10 @@ boundary conditions), and basic quantum mechanics (stationary Schrodinger
 equation, operators, commutators, one-dimensional systems,
 non-degenerate perturbation theory and spin-1/2 basics).
 
-**Out of scope**: other undergraduate topics (thermodynamics, optics,
-statistical physics, special relativity), graduate courses, research
-workflows, lab-only content, and computational physics programming.
+**Out of scope**: other undergraduate topics (thermodynamics, statistical
+physics, optics/waves, special relativity — currently on the roadmap),
+graduate courses, research workflows, lab-only content, and computational
+physics programming.
 
 ## Verification Engine (Summary)
 
@@ -87,6 +89,31 @@ Any FAIL triggers the backtrack protocol; after two failed corrections,
 switch to an independent route or explicitly state that no verified answer
 can be given. The authoritative definitions live in
 `modules/verification_engine.md`.
+
+## Coverage and Roadmap
+
+Current coverage: classical mechanics, electromagnetism, and basic quantum
+mechanics.
+
+Planned undergraduate areas (not yet covered):
+
+- [ ] Thermodynamics
+- [ ] Statistical physics
+- [ ] Optics / waves
+- [ ] Special relativity
+
+Until these are added, "undergrad physics" describes the target positioning,
+not the full covered set; out-of-scope problems are declared before solving.
+
+## Tool Gate
+
+- L1 simple problems: hand calculation only; external tools are forbidden
+- L2 medium problems: one symbolic cross-check allowed when available
+- L3 complex problems: auto-upgrade to one symbolic/numerical check when available
+- L4 high-confidence/review: independent P1–P5 review
+
+Tool claims must come from real execution; never claim "verified" unless a
+tool actually ran.
 
 ## Repository Layout
 
@@ -128,6 +155,7 @@ undergrad-physics-skill/
 - [x] v0.5.2: review fixes — J numbering as ⑦, step references, Faraday
   pointer, scope alignment, structural validator, license verification
 - [x] v0.7: minimum sufficient verification, entry routing, LaTeX document mode, example index, adversarial cases and spot-check; includes all v0.6 P0/P1 work
+- [ ] v0.8: L1–L4 tool gate; coverage roadmap for thermodynamics, statistical physics, optics/waves, and special relativity
 - [ ] v1.0: formal release
 
 ## License

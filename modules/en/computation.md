@@ -1,10 +1,10 @@
 # Symbolic Computation Recipes (Optional Computation)
 
-This module provides **optional** cross-check recipes; it is not part of the main flow. Use it only when **Python plus SymPy/SciPy is available and the user requests it**.
+This module provides **optional** cross-check recipes per the Level 1–4 tool gate: medium problems may run one symbolic cross-check, and complex problems auto-upgrade to one when available; L1 simple problems forbid tools, and tools are also disabled when the user asks for hand calculation only.
 
-**Ignored by default**: without an explicit user request, do not invoke Python/SymPy or claim in the output that SymPy verified the work.
+**Default discipline**: tool calls must actually run and be reported from real output; never claim "verified with SymPy" unless it ran. If Python/SymPy is unavailable, skip and keep the main flow unaffected.
 
-**Rule**: output from these recipes is cross-check evidence only; it cannot replace the main flow's PASS/FAIL records. If it disagrees with a hand calculation, follow the Backtrack-and-Fix Protocol.
+**Rule**: output from these recipes is cross-check evidence only; it cannot replace the main flow's PASS/FAIL records. If it disagrees with a hand calculation, follow the Backtrack-and-Fix Protocol. Run at most one symbolic cross-check per problem unless the user asks for more.
 
 ## Recipe Overview
 
@@ -109,6 +109,7 @@ print(sp.simplify(comm))  # I*ħ·f(x)  OK
 
 ## When Not Applicable
 
+- L1 simple problems → tools are forbidden
 - No Python/SymPy in the environment → skip; the main flow is unaffected
 - Pure concept / proof problems → not needed
 - User requests hand calculation only → do not use

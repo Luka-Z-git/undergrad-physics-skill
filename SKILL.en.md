@@ -1,6 +1,6 @@
 ---
 name: undergrad-physics-skill
-version: 0.7.0
+version: 0.8.0
 description: Undergraduate physics (mechanics, electromagnetism, basic quantum mechanics): derivations with a minimum sufficient verification set before final answers. Use for equations of motion, field/circuit/Schrödinger problems, derivation checks, or student-answer diagnosis. 本科物理习题（理论力学/电磁学/基础量子力学）分步推导、验算、检查学生作答。
 ---
 
@@ -14,19 +14,38 @@ Undergraduate physics problem-solving skill: step-by-step derivation + built-in 
 
 A derivation-oriented skill for undergraduate physics problems (classical mechanics, electromagnetism, basic quantum mechanics). Every solution follows **step-by-step derivation → minimum sufficient verification → final answer only after verification passes**. When verification cannot be completed, state the uncertainty, missing conditions, and next information needed.
 
-This skill has zero external dependencies: the verification flow is executed by reasoning itself (hand calculation / symbolic substitution / numerical sampling), without relying on any script, environment, or plugin. Python/SymPy symbolic cross-checks are used only when the user explicitly asks, and only once; no external tools are invoked automatically by default (see `modules/computation.md`).
+This skill has zero **hard** external dependencies: verification is executed by reasoning itself (hand calculation / symbolic substitution / numerical sampling) by default, without relying on any script, environment, or plugin. If Python + SymPy/SciPy is available, complex problems may automatically upgrade to one symbolic cross-check; when tools are unavailable the main flow is unaffected and falls back to hand calculation with an explicit note (see `modules/computation.md`).
 
-**Tool gate**: this skill is hand-computed by default; without an explicit user request, do not invoke Python/SymPy, math-skill, numerical-integration scripts, or other external tools, and do not claim they verified the answer.
+**Tool gate (Level 1–4)**:
+- L1 simple problems: hand calculation only; external tools are forbidden.
+- L2 medium problems: hand calculation first; one symbolic cross-check is allowed when available, otherwise hand calculation.
+- L3 complex problems: automatic upgrade — run one symbolic cross-check (ODE, eigenvalues, integrals, normalization, etc.) when available; otherwise hand-calculate and state "no tool used".
+- L4 high-confidence/review requests: run the P1–P5 review per `review_engine.md` on top of L3; blank-paper restart follows that module.
+
+Tool claims must be backed by real execution; never claim "verified with SymPy/Python" unless a tool actually ran. If the user explicitly asks for hand calculation only, tools are disabled at every level.
 
 ## Scope
+
+**Current coverage**: classical mechanics, electromagnetism, and basic quantum mechanics; the remaining undergraduate areas are on the coverage roadmap and are not covered yet (see below).
 
 - **Classical mechanics**: Newtonian mechanics, Lagrangian mechanics, Hamiltonian mechanics, differential equations of motion, conserved quantities, small oscillations and normal modes, constrained systems, rigid-body basics (planar motion / rolling without slipping / collisions), non-inertial frames.
 - **Electromagnetism**: electrostatics, magnetostatics (vacuum-focused; linear media only at the boundary-condition level, no polarization/magnetization derivations), vector calculus (gradient/divergence/curl), potential and field strength, capacitance/inductance, circuits (RC/RL/RLC), basic applications of Maxwell's equations.
 - **Basic quantum mechanics**: time-independent Schrödinger equation, one-dimensional wells/barriers, harmonic oscillator, angular momentum and operators, commutation relations, introductory derivation of hydrogen energy levels, non-degenerate perturbation theory and spin-1/2 basics.
 
+## Coverage Roadmap
+
+The following undergraduate areas are not covered yet and are planned for later versions:
+
+- [ ] Thermodynamics
+- [ ] Statistical physics
+- [ ] Optics / waves
+- [ ] Special relativity
+
+Until these are added, "undergrad physics" describes the target positioning, not the full covered set.
+
 ## Out of Scope
 
-- Other undergraduate areas: thermodynamics, optics, statistical physics, special relativity, etc. (this skill covers only classical mechanics, electromagnetism, and basic quantum mechanics).
+- Other undergraduate areas: thermodynamics, statistical physics, optics/waves, special relativity, etc. (currently not covered; listed on the coverage roadmap; declare out of scope when encountered).
 - Graduate-level courses: quantum field theory, general relativity, group theory, many-body theory, cosmology, etc.
 - Research workflows: paper reproduction, arXiv reading, multi-agent research pipelines.
 - Pure lab-course content, computational physics programming tasks.
@@ -59,8 +78,8 @@ By default Template A runs the full six-step workflow; Templates B/D and C/E use
 
 1. **Parse**: extract the physical system — objects, degrees of freedom, constraints, coordinate system, unit system, initial/boundary conditions, known and unknown quantities; list implicit conditions (e.g., nonzero denominators, reality of energy, parameter ranges). For a complex or high-risk problem, or when the user requests high confidence, use `examples/INDEX.md` to read **one** matching example for structure and verification style only. When conditions are insufficient, ask the key clarifying question; when a reasonable assumption is available, state it before continuing. Completion criterion: all the above items are explicitly listed, with no undeclared parameters or conditions.
 2. **Model**: choose the equation framework (Newton / Lagrange / Hamilton / Maxwell / Schrödinger) and explain the choice; write the explicit form of the Lagrangian, Hamiltonian, or equation system; confirm the applicability conditions of every theorem/law invoked. Completion criterion: equation framework, explicit expressions, and applicability conditions all present.
-3. **Derive**: step-by-step derivation, each step annotated with its justification; symbolic derivation first, numerical substitution last. At each key intermediate result, approximation/representation change, and before the final result, run the most appropriate quick check and record it inline. Linear-algebra subproblems may use `math-skill` only when the user asks, with a note of borrowed results; otherwise compute by hand per J consistency. External tools are not invoked automatically. Completion criterion: every step has a justification and is independently verifiable; symbolic derivation completed before numerical substitution.
-4. **Verify**: select a minimum sufficient verification set from `modules/verification_engine.md`: normally F and B, plus one independent L/C/D/E/I/J check; default total is 3, at most 5 when the user asks for high confidence; record a physical reason for every N/A. Numerical sampling (E) uses only small hand-checkable samples; do not automatically run scripted integration. A J check required by a domain module cannot be replaced. Give PASS/FAIL item by item; on failure, enter the backtracking correction protocol. Completion criterion: every selected check PASS, every N/A justified, FAIL 0 items.
+3. **Derive**: step-by-step derivation, each step annotated with its justification; symbolic derivation first, numerical substitution last. At each key intermediate result, approximation/representation change, and before the final result, run the most appropriate quick check and record it inline. Linear-algebra subproblems default to hand calculation per J consistency; complex problems may auto-upgrade to a SymPy cross-check under L3; when `math-skill` is used, note which results were borrowed. Completion criterion: every step has a justification and is independently verifiable; symbolic derivation completed before numerical substitution.
+4. **Verify**: select a minimum sufficient verification set from `modules/verification_engine.md`: normally F and B, plus one independent L/C/D/E/I/J check; default total is 3, at most 5 when the user asks for high confidence; record a physical reason for every N/A. Numerical sampling (E) uses small hand-checkable samples for simple/medium problems; complex problems may run one numerical script under L3 when available, recording the real result. A J check required by a domain module cannot be replaced. Give PASS/FAIL item by item; on failure, enter the backtracking correction protocol. Completion criterion: every selected check PASS, every N/A justified, FAIL 0 items.
 5. **Review (optional)**: when the user demands high confidence or the problem is complex, run an independent review per `modules/review_engine.md` and append a P1–P5 summary; blank-paper restart runs only when the user asks or a pathology is found. Skip when not requested. Completion criterion: when triggered, P1–P5 all PASS, or a clean-sheet re-derivation yields FAIL 0 items.
 6. **Answer**: first execute the structural gate of the selected template (default Template A with six sections, see `modules/output_templates.md`); then give the final answer (bold, with units and applicability conditions) plus a one-line verification summary; list this problem's genuine pitfalls (omit if none). Completion criterion: the selected template's structural gate passes, and the answer bolding, verification summary, and formatting rules are all satisfied.
 
@@ -80,7 +99,7 @@ A standard solution uses a **minimum sufficient verification set**: normally F a
 
 - Use Chinese Markdown with standard LaTeX formulae by default; template selection, structural gates, and verification-summary formats are in `modules/output_templates.md`.
 - When the user requests a compilable document, use that module's LaTeX document mode; by default output the code directly without writing a file, and keep simple problems compact; do not mix Markdown markers with LaTeX-document markup.
-- Without an explicit user request, do not invoke external tools or claim that SymPy/Python verified the answer.
+- Tool use follows the L1–L4 gate; only write "verified with SymPy/Python" when a tool actually ran.
 - **Output stop-loss**: split complex or multi-part problems into sections, giving each part's final result and one-line verification first; never return an empty answer.
 
 ## Honesty Principles
@@ -101,7 +120,7 @@ A standard solution uses a **minimum sufficient verification set**: normally F a
 | Quantum Basics | `modules/quantum_basics.md` | Time-independent Schrödinger / operators / commutators / one-dimensional systems / perturbation and spin basics |
 | Error Prevention | `modules/error_prevention.md` | Cross-domain error checklist and pitfall tables |
 | Output Templates | `modules/output_templates.md` | Template selection, structural gates, Markdown and LaTeX document modes |
-| Symbolic Computation | `modules/computation.md` | Optional SymPy/SciPy cross-check recipes (graceful degradation without dependencies) |
+| Symbolic Computation | `modules/computation.md` | Optional SymPy/SciPy cross-check recipes (L2–L3 use, graceful degradation without dependencies) |
 | Example Index | `examples/INDEX.md` | Pick one example by problem type for complex/high-risk work |
 | Examples | `examples/` | Complete worked examples with verification |
 | Tests | `tests/` | Test-case assertions (TC-XXX-NNN) |
