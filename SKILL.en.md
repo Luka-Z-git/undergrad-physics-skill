@@ -40,11 +40,19 @@ This skill has zero external dependencies: the verification flow is executed by 
 | Check / diagnose an attempt | Template C/E + Student Diagnosis mode |
 | Compilable Overleaf document | Switch to LaTeX document mode on the entry above |
 
+Per-template execution scope:
+
+- Template A: full six-step workflow (review optional).
+- Template B: only minimal necessary verification (F/B or one independent check), then answer; no six sections.
+- Template D: direct answer plus one minimal example; no derivation workflow.
+- Template C/E: locate errors per the diagnosis protocol; do not solve from scratch.
+- LaTeX document mode: switch the output format on the selected entry; verification scope is unchanged.
+
 Full template definitions live in `modules/output_templates.md`.
 
 ## Core Workflow
 
-Execute the following steps in order for every problem; proceed to the next step only after the completion criterion of the current step is met.
+By default Template A runs the full six-step workflow; Templates B/D and C/E use their minimal paths (see Entry Routing) — do not run unnecessary derivation or verification. Proceed to the next step only after the completion criterion of the current step is met.
 
 1. **Parse**: extract the physical system — objects, degrees of freedom, constraints, coordinate system, unit system, initial/boundary conditions, known and unknown quantities; list implicit conditions (e.g., nonzero denominators, reality of energy, parameter ranges). For a complex or high-risk problem, or when the user requests high confidence, use `examples/INDEX.md` to read **one** matching example for structure and verification style only. When conditions are insufficient, ask the key clarifying question; when a reasonable assumption is available, state it before continuing. Completion criterion: all the above items are explicitly listed, with no undeclared parameters or conditions.
 2. **Model**: choose the equation framework (Newton / Lagrange / Hamilton / Maxwell / Schrödinger) and explain the choice; write the explicit form of the Lagrangian, Hamiltonian, or equation system; confirm the applicability conditions of every theorem/law invoked. Completion criterion: equation framework, explicit expressions, and applicability conditions all present.
