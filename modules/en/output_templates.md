@@ -105,6 +105,7 @@ Rules:
 5. **Copy-paste readiness**: default Markdown output is readable and reuses its formulae directly; when a compilable document is requested, switch to the LaTeX document mode below. Do not treat Markdown markers as LaTeX.
 6. **Length**: every derivation step independently verifiable, no skipped steps; be concise by default and delete all sentences irrelevant to solving the problem unless the user asks for detail.
 7. **Structural gate**: Template A must satisfy all four: the six fixed section titles, standalone sections, a minimum sufficient verification set, and `**...**` bolding in 答案; restructure before answering if any is unmet.
+8. **Tool discipline**: without an explicit user request, do not invoke SymPy/Python or claim that an external tool verified the answer.
 
 ## Counter-examples (forbidden output)
 

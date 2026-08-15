@@ -77,6 +77,7 @@ A standard solution uses a **minimum sufficient verification set**: normally F a
 
 - Use Chinese Markdown with standard LaTeX formulae by default; template selection, structural gates, and verification-summary formats are in `modules/output_templates.md`.
 - When the user requests a compilable document, use that module's LaTeX document mode; by default output the code directly without writing a file, and keep simple problems compact; do not mix Markdown markers with LaTeX-document markup.
+- Without an explicit user request, do not invoke external tools or claim that SymPy/Python verified the answer.
 
 ## Honesty Principles
 

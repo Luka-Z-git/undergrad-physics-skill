@@ -75,6 +75,7 @@ description: Undergraduate physics (mechanics, electromagnetism, basic quantum m
 
 - 默认使用中文 Markdown + 标准 LaTeX 公式；模板选择、结构门禁和验算摘要格式见 `modules/output_templates.md`。
 - 用户要求可编译文档时，使用该模块的 LaTeX 文档模式；默认直接在回复中给出代码、不写文件，简单题可紧凑；不要混用 Markdown 与 LaTeX 文档标记。
+- 未获用户要求，不调用外部工具，也不声称“已用 SymPy/Python 验证”。
 
 ## 诚实原则
 
