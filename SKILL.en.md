@@ -76,7 +76,7 @@ A standard solution uses a **minimum sufficient verification set**: normally F a
 ## Output Rules
 
 - Use Chinese Markdown with standard LaTeX formulae by default; template selection, structural gates, and verification-summary formats are in `modules/output_templates.md`.
-- When the user requests a compilable document, use that module's LaTeX document mode; do not mix Markdown markers with LaTeX-document markup.
+- When the user requests a compilable document, use that module's LaTeX document mode; by default output the code directly without writing a file, and keep simple problems compact; do not mix Markdown markers with LaTeX-document markup.
 
 ## Honesty Principles
 

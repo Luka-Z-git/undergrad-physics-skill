@@ -127,6 +127,8 @@ Replace Markdown headings with `\section*{...}`, `**conclusions**` with `\textbf
 
 This mode uses no Markdown tables, `**...**`, or circled numbers; numerical values, formulae, and verification evidence remain identical to Markdown mode.
 
+By default, output the LaTeX code block only and do not create or save a file; write a file only when the user explicitly asks. For simple problems use a compact structure: one-sentence problem statement, modeling, derivation, verification, answer; pitfalls are optional. Keep simple LaTeX documents within about 60 lines, with one line of compilation notes.
+
 ## Difficulty Grading and Output Granularity (executed in step 1 of the core workflow)
 
 After the Parse phase completes and before modeling begins, assess problem complexity and adapt output granularity per the rules below. Every difficulty uses a minimum sufficient verification set; never add an inapplicable item merely to fill a checklist.
