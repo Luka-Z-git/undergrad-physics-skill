@@ -105,7 +105,7 @@ Rules:
 5. **Copy-paste readiness**: default Markdown output is readable and reuses its formulae directly; when a compilable document is requested, switch to the LaTeX document mode below. Do not treat Markdown markers as LaTeX.
 6. **Length**: every derivation step independently verifiable, no skipped steps; be concise by default and delete all sentences irrelevant to solving the problem unless the user asks for detail.
 7. **Structural gate**: Template A must satisfy all four: the six fixed section titles, standalone sections, a minimum sufficient verification set, and `**...**` bolding in 答案; restructure before answering if any is unmet.
-8. **Tool discipline**: without an explicit user request, do not invoke SymPy/Python or claim that an external tool verified the answer.
+8. **Tool discipline**: without an explicit user request, do not invoke SymPy/Python, numerical-integration scripts, or other external tools, and do not claim they verified the answer.
 
 ## Counter-examples (forbidden output)
 
@@ -142,6 +142,6 @@ After the Parse phase completes and before modeling begins, assess problem compl
 
 **Discipline**:
 - Declare the complexity assessment in one sentence at the end of the Parse step, e.g., "本题评估为：中等（双自由度耦合，推导约 6 步）" (assessed as: medium — two coupled DOF, ~6 derivation steps).
-- Be concise by default: simple problems use ≤3 checks and a few lines; medium ≤5; complex ≤5; do not add equivalent matrix forms or SymPy checks by default; output only what the problem asks for, omitting unrequested general solutions/normal coordinates/equivalent forms; reviews appear as a P1–P5 summary.
+- Be concise by default: simple problems use ≤3 checks and a few lines; medium ≤5; complex ≤5; do not add equivalent matrix forms or SymPy checks by default; output only what the problem asks for, omitting unrequested general solutions/normal coordinates/equivalent forms; reviews appear as a P1–P5 summary. For multi-part or very complex problems, answer section by section with the conclusion first; keep the default total within about 120 lines and never return an empty answer.
 - The compact form for simple problems retains concrete evidence for every selected check and does not require inapplicable checks.
 - When the user explicitly requests a "detailed solution" / "complete steps", ignore the automatic grading and always output to the complex-problem standard.
