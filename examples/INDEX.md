@@ -7,7 +7,9 @@
 | 约束与拉格朗日 | `pendulum_lagrangian.md`、`bead_rotating_hoop.md` | F、B、L、C |
 | 刚体滚动或碰撞 | `rolling_cylinder.md` | 约束、能量与回代 |
 | 非惯性系 | `coriolis_effect.md` | 极限与力方向 |
+| 带电粒子在磁场中 | `cyclotron_motion.md` | 洛伦兹力回代与能量守恒 |
 | 小振动与简正模式 | `coupled_oscillators.md` | J 特征值回代与 M-正交 |
+| 边界/退化案例 | `unstable_equilibrium.md`、`zero_frequency_mode.md` | 稳定性判定与零模讨论 |
 | 静电边界 | `dielectric_boundary.md` | 边界条件与定义域 |
 | 感应与平面波 | `faraday_induction.md`、`em_plane_wave.md` | 麦克斯韦方程回代 |
 | 一阶电路 | `rc_discharge.md` | 初末极限与能量耗散 |
