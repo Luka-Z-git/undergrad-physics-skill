@@ -35,6 +35,7 @@ Fixed titles (use verbatim): `题意与图景`, `建模`, `推导`, `验算`, `�
 - Symbols before numbers: carry the symbolic derivation through first; substitute numerical values only at the end.
 - At each key intermediate result, approximation/representation change, and before the final result, run the most appropriate quick check and record it inline.
 - When using `math-skill` for matrix / eigenvalue / matrix-power / recurrence subproblems, note which results were borrowed (e.g., "matrix part verified by math-skill").
+- Write only necessary steps; do not output equivalent matrix forms or SymPy checks by default.
 
 ### 4. 验算 (Verification)
 
@@ -138,5 +139,6 @@ After the Parse phase completes and before modeling begins, assess problem compl
 
 **Discipline**:
 - Declare the complexity assessment in one sentence at the end of the Parse step, e.g., "本题评估为：中等（双自由度耦合，推导约 6 步）" (assessed as: medium — two coupled DOF, ~6 derivation steps).
+- Be concise by default: simple problems use ≤3 checks and a few lines; medium ≤5; complex ≤5; do not add equivalent matrix forms or SymPy checks by default.
 - The compact form for simple problems retains concrete evidence for every selected check and does not require inapplicable checks.
 - When the user explicitly requests a "detailed solution" / "complete steps", ignore the automatic grading and always output to the complex-problem standard.
