@@ -2,7 +2,7 @@
 
 本项目提交信息遵循 [Conventional Commits](https://www.conventionalcommits.org/) 风格（feat/fix/docs/refactor/chore），本文件由人工维护。
 
-## v0.8.0 (unreleased)
+## v0.8.0 (feature-complete; release pending)
 
 ### Added
 
@@ -15,6 +15,7 @@
 - 定位措辞：明确“undergrad physics”为目标定位，当前覆盖三域
 - 工具纪律：从“未获要求一律禁止”改为分级自动升级；禁止虚构工具验证的规则保留并强化
 - 输出默认：复杂题自动升级时只给一行工具结论，不展开脚本
+- README 重构为“验证与修复层”定位，增加 FAIL→修复演示、60 秒安装/试用闭环、可观察的生效信号与 benchmark 边界声明
 
 ## v0.7.0 - 2026-08-15
 

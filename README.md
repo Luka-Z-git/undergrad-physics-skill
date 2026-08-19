@@ -1,120 +1,154 @@
 # undergrad-physics-skill
 
+[![validate](https://github.com/Luka-Z-git/undergrad-physics-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/Luka-Z-git/undergrad-physics-skill/actions/workflows/validate.yml)
 ![License](https://img.shields.io/badge/License-MIT%20%2B%20CC%20BY%204.0-orange)
 ![Examples](https://img.shields.io/badge/examples-20-blue)
-![Tests](https://img.shields.io/badge/tests-18-blue)
 
-面向大学本科物理习题的 Codex/Claude 推导型技能：**分步推导 + 内置验证 + 中文叙述 + LaTeX-ready 输出**。
+> **不是另一个物理解题器，而是 AI 本科物理解答的验证与修复层。**
 
-English version: [README.en.md](README.en.md)
+AI 物理解答最危险的不是明显胡说，而是符号、边界条件、量纲、极限、守恒律或归一化已经出错，答案仍然看起来合理。本 skill 要求 Codex / Claude 在提交最终答案前给出可复核的物理验算证据。
 
-**快速上手**：`SKILL.md` 包含完整的定位、工作流、验证引擎摘要与模块索引。快速开始演示见 [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEMO.md)。本文档仅补充安装、触发方式与项目元信息。
+[English](README.en.md) · [60 秒试用](#60-秒试用) · [完整演示](docs/QUICKSTART_DEMO.md) · [工作原理](SKILL.md)
 
-## 安装
+## 四条可靠性原则
 
-- **Codex**：将本仓库内容放入 `~/.codex/skills/undergrad-physics-skill/`。
-- **Claude Code**：放入 `~/.claude/skills/undergrad-physics-skill/`。
-- **WorkBuddy**：放入技能目录或工作区 `.workbuddy/skills/`。
+- **No evidence, no PASS**：每个 PASS 必须紧邻一项实际执行、可由读者复核的检查。
+- **Fail visibly, repair explicitly**：发现矛盾后显式标记 FAIL，定位错误，回到最后一个可靠步骤，修正后重新验算。
+- **Tools must be real**：没有真实运行 Python / SymPy，就不声称做过工具验证；工具不可用时明确披露手算降级。
+- **Physics-aware verification**：根据题型选择量纲、回代、边界、极限、守恒、归一化等最小充分检查，不为凑数机械套模板。
 
-## 触发
+## 看它怎样抓住一个错误
 
-直接提问物理习题即可自动触发：
+下面是仓库中的**回退协议演示例题**，用于展示 skill 应有的行为；它不是尚未完成的模型 A/B benchmark。
 
-- "用拉格朗日方法求双摆的运动微分方程"
-- "推导带电粒子在均匀磁场中的回旋运动"
-- "解一维无限深势阱的定态薛定谔方程并验证归一化"
-- "帮我看看我写的这步对不对"（进入学生诊断模式）
+质量为 $m$ 的物块从粗糙斜面下滑距离 $s$。一个看似熟悉的第一次推导直接套用机械能守恒：
 
-矩阵/特征值子问题可联动 `math-skill`（可选；无则按 J 一致性手算）。
+$$
+\frac12mv^2=mgs\sin\alpha
+\quad\Rightarrow\quad
+v_{\rm wrong}=\sqrt{2gs\sin\alpha}.
+$$
 
-## 覆盖现状与路线图
+**检查 → FAIL：** 动摩擦力做功 $W_f=-\mu mg\cos\alpha\,s\neq0$，机械能并不守恒。上式漏掉耗散项，因此不能通过守恒量检查。
 
-当前覆盖：理论力学、电磁学、基础量子力学。
+**定位与修复：** 回到建模步骤，改用功能原理：
 
-后续本科方向路线图（尚未覆盖）：
+$$
+(mg\sin\alpha-\mu mg\cos\alpha)s=\frac12mv^2,
+$$
 
-- [ ] 热学
-- [ ] 统计物理
-- [ ] 光学/波动
-- [ ] 狭义相对论
+得到
 
-补齐前，“undergrad physics”是目标定位而非已覆盖全集；遇到范围外题目会先声明。
+$$
+v=\sqrt{2gs(\sin\alpha-\mu\cos\alpha)}.
+$$
 
-## 工具门禁
+**重新验算 → PASS：** 用牛顿第二定律得到 $a=g(\sin\alpha-\mu\cos\alpha)$，再由 $v^2=2as$ 得到同一结果；当 $\mu\to0$ 时也还原无摩擦极限。
 
-- L1 简单题：纯手算，禁止外部工具
-- L2 中等题：环境可用时允许一次符号复核
-- L3 复杂题：环境可用时自动升级一次符号/数值复核
-- L4 高置信度/复核：执行独立复核 P1–P5
+[查看完整的 FAIL → 定位 → 修复 → 重验过程](examples/backtrack_demonstration.md)
 
-工具调用必须真实执行，未执行时不得声称“已验证”。
+## 60 秒试用
 
-## 目录结构
+### 1. 安装
 
-```
-undergrad-physics-skill/
-├── SKILL.md                      # 主干：定位、工作流、验证摘要、模块索引
-├── SKILL.en.md                   # English trunk
-├── docs/                        # 快速开始演示
-├── modules/
-│   ├── mechanics.md              # 理论力学领域协议
-│   ├── electromagnetism.md       # 电磁学领域协议
-│   ├── quantum_basics.md         # 基础量子力学领域协议
-│   ├── verification_engine.md    # 8 种验证方法 + 回溯协议（含 v0.5 成本止损）
-│   ├── review_engine.md          # 可选独立复核
-│   ├── tutoring_mode.md          # 可选学生诊断 + 确认题质量标准
-│   ├── output_templates.md       # 输出模板 + v0.5 难度分级
-│   ├── error_prevention.md       # 跨域错误预防清单
-│   ├── computation.md            # 可选符号复核（L2–L3 门禁）
-│   └── en/                       # 英文同步模块（发布时生成物，随中文版更新）
-├── examples/                     # 完整带验证的例题（20 个）
-├── tests/                        # 用例断言（TC-XXX-NNN，18 个）+ 结构校验器
-├── .github/                      # CI（结构门禁）+ issue 模板
-├── CONTRIBUTING.md               # 贡献与例题收录标准
-├── CHANGELOG.md                  # 版本变更记录（Conventional Commits）
-├── NOTICE                        # 许可与专利声明
-├── LICENSE                       # MIT（脚本可选）
-├── LICENSE-APACHE                # Apache-2.0（脚本可选，含专利条款）
-└── LICENSE-CC-BY                 # CC BY 4.0（文本）
+Codex（PowerShell）：
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills" | Out-Null
+git clone https://github.com/Luka-Z-git/undergrad-physics-skill.git "$env:USERPROFILE\.codex\skills\undergrad-physics-skill"
 ```
 
-## 开发状态
+Codex（macOS / Linux）：
 
-- [x] v0.1–v0.3：三领域模块 + 验证引擎 + 输出模板 + 例题 + 测试
-- [x] v0.4：学生诊断模式
-- [x] v0.5：生产级加固——范围边界、难度分级、成本止损、确认题标准
-- [x] v0.5.1：瘦身优化——跨域陷阱表去重、README/test_cases 精简
-- [x] v0.5.2：评审修复——⑦J 编号、步骤引用、法拉第指针、范围对齐、结构校验器、版权核实、5 个缺域例题、CI、英文模块同步、双许可
-- [x] v0.7：最小充分验算策略、顶层路由、LaTeX 文档模式、示例索引、对抗案例与抽查记录；含 v0.6 P0/P1 全部内容
-- [ ] v0.8：L1–L4 工具门禁；热学、统计物理、光学/波动、狭义相对论覆盖路线图
-- [ ] v1.0：正式发布
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/Luka-Z-git/undergrad-physics-skill.git ~/.codex/skills/undergrad-physics-skill
+```
 
-## 许可
+Claude Code 使用相同仓库内容，将目标目录换成 `~/.claude/skills/undergrad-physics-skill/`。Codex 是当前主要验证平台；Claude Code 的文件布局兼容，但尚未完成与 Codex 同等规模的行为回归。
 
-双许可：脚本（如 `tests/validate_structure.py`）为 MIT OR Apache-2.0（见 [LICENSE](LICENSE) 与 [LICENSE-APACHE](LICENSE-APACHE)）；模块、例题与测试的文本为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)（见 [LICENSE-CC-BY](LICENSE-CC-BY)）。详见 [NOTICE](NOTICE)。
+### 2. 提问
 
-商用说明：CC BY 4.0 允许商用，只需署名并提供许可链接；本项目选择 CC BY 4.0 以最大化传播。
+复制下面这道诊断题：
 
-许可与专利：本项目公开即构成 prior art；脚本按 Apache-2.0 使用时附带标准专利授权与终止条款（见 LICENSE-APACHE）；作者不主张本仓库方法的专利。
+> 带动摩擦的斜面下滑，我直接写 $\frac12mv^2=mgs\sin\alpha$。请检查这一步；不要静默替换答案，若检查失败，请指出失败证据、定位错误并在修正后重新验算。
 
-**如何署名**：复用或改编文本时使用：`文本内容：undergrad-physics-skill contributors，采用 CC BY 4.0 许可（https://creativecommons.org/licenses/by/4.0/）。如已修改，请注明修改。`
+也可以直接求解：
 
-## 发现问题？
+- “用拉格朗日方法推导单摆方程，并检查量纲、回代与小角度极限。”
+- “解一维无限深势阱，并验证边界条件与归一化。”
+- “检查我的 RC 放电推导，只指出第一处物理错误，不要重做整题。”
 
-发现解题错误、验证被跳过或格式问题，请提交 Issue：
+### 3. 判断是否生效
 
-- [错题报告](.github/ISSUE_TEMPLATE/wrong_answer.md)：报告错误、伪造 PASS 或遗漏验证
-- [新例题提案](.github/ISSUE_TEMPLATE/new_example.md)：提议补充缺失题型
+你应该看到：
 
-提交前尽量附上题目、技能输出与你自己的推算，便于定位。
+- 具体的代入式、量纲式、极限或守恒关系，而不只是“经验证正确”；
+- 每个 PASS 与它的证据放在一起；
+- 如果检查失败，明确出现“FAIL → 定位 → 修复 → 重新验算”，而不是悄悄覆盖原答案。
 
-## 致谢 (Credits)
+如果只得到普通解答，可在问题中显式写出 skill 名称 `undergrad-physics-skill`，并确认仓库根目录的 `SKILL.md` 位于上述技能目录中。
 
-本技能的结构与验证方法受以下开源项目启发（均为独立实现，未复制原文；上游许可证已于 2026-08-14 核实，详见 [NOTICE](NOTICE)）：
+## 为什么需要它
 
-- `math-skill` — 可选的数学推理协作技能；不可用时按 J 一致性手算
-- [landau-mode](https://github.com/shaevitz/landau-mode) — 病理过滤与白纸重推的方法思路
-- [ScienceClaw physics-solver](https://github.com/beita6969/ScienceClaw) — 符号计算配方思路
-- [xiaozhi-skills](https://github.com/qizhitang/xiaozhi-skills) — 中文物理解题流程的图景建模思路
-- [Agent Almanac](https://github.com/pjt222/agent-almanac) — 电磁感应与磁场分析的分步协议
-- [Electromagnetism (LobeHub)](https://lobehub.com/skills/tibsfox-gsd-skill-creator-electromagnetism) — 公式与陷阱参考结构（上游为 BSL 1.1，仅参考结构，未并入任何文字）
+| 常见失败模式 | 本 skill 的响应 |
+|---|---|
+| 推导流畅，但符号或量纲错误 | 展示量纲检查或回代原方程的实际计算 |
+| 解满足方程，却漏掉初始/边界条件 | 将题目约束纳入验证，而不只检查代数 |
+| 最后写“经验证正确”，却没有过程 | 没有可复核证据就不允许标记 PASS |
+| 发现矛盾后直接换一个答案 | 保留 FAIL，定位首个错误步骤，修复后重验 |
+| 声称用过 Python / SymPy，实际未运行 | 只报告真实工具结果；否则声明手算降级 |
+| 学生问“这一步哪里错了”，AI 却重做整题 | 进入学生诊断模式，定位第一处错误及对应概念误区 |
+
+## 当前证据与限制
+
+当前仓库提供的是**可审阅的设计约束、演示例题和确定性测试**：
+
+- 20 个带验证的例题，其中包括边界、退化、学生诊断和失败回溯案例；
+- 12 个对抗性行为用例，约束伪 PASS、漏边界、耗散系统误用守恒、虚构工具验证等行为；
+- 零依赖的结构门禁、数值回归和体积预算，通过 GitHub Actions 运行；
+- 中英文模块与明确的范围外声明。
+
+**模型 A/B benchmark 尚未完成。** 在公开同模型、同题目、同设置的对照结果前，本项目不声称已经测得正确率提升。计划中的 benchmark 将同时报告最终答案、关键推导、未发现矛盾、无证据 PASS，以及输出长度/延迟成本，详见 [v1.0 改进计划](docs/V1_IMPROVEMENT_PLAN.md)。
+
+## 覆盖范围
+
+当前覆盖：
+
+- **理论力学**：牛顿、拉格朗日、哈密顿、小振动、约束、刚体基础与非惯性系；
+- **电磁学**：静电、静磁、电路、麦克斯韦方程基础与线性介质边界条件；
+- **基础量子力学**：定态薛定谔方程、一维系统、算符与对易、微扰论和自旋 1/2 入门。
+
+当前范围外：热学、统计物理、光学/波动、狭义相对论、研究生方向课、科研工作流、实验课与计算物理编程。遇到范围外题目时，skill 会先声明，而不是假装已经覆盖。
+
+## 工作方式
+
+完整求解走 `解析 → 建模 → 推导 → 验证 → 可选复核 → 作答`；只要结果、概念问答和学生诊断会走更短的专用路径。标准完整解通常使用量纲与回代，再加一项题型相关的独立检查；任何不适用项都必须给出物理理由。
+
+- [SKILL.md](SKILL.md)：入口路由、核心流程与模块索引；
+- [验证引擎](modules/verification_engine.md)：检查选择、PASS/FAIL 证据和回退协议；
+- [学生诊断](modules/tutoring_mode.md)：检查学生作答而不自动泄漏完整答案；
+- [示例索引](examples/INDEX.md)：按题型选择完整例题；
+- [贡献指南](CONTRIBUTING.md)：新增例题、模块与测试的标准。
+
+## 版本状态
+
+- [x] v0.1–v0.5.2：三领域、验证引擎、学生诊断、示例、结构校验与双许可；
+- [x] v0.7：最小充分验算、入口路由、LaTeX 文档模式、对抗案例与数值回归；
+- [x] v0.8：L1–L4 工具门禁与本科领域覆盖路线图——**功能已完成，正式 tag / GitHub Release 待发布**；
+- [ ] v1.0：公开可复现的物理解题 A/B benchmark。
+
+## 许可与反馈
+
+脚本采用 MIT OR Apache-2.0；模块、例题与测试文本采用 [CC BY 4.0](LICENSE-CC-BY)，允许在署名并提供许可链接后商用。完整说明见 [NOTICE](NOTICE)。
+
+发现错误时，请提交：
+
+- [错题报告](.github/ISSUE_TEMPLATE/wrong_answer.md)：错误答案、伪 PASS、漏验证或工具声明问题；
+- [新例题提案](.github/ISSUE_TEMPLATE/new_example.md)：缺失题型或值得加入回归的真实失败案例。
+
+如果本 skill 帮你发现过一次原本没注意到的物理错误，欢迎点一个 Star，或把那道题提交为新的回归案例。
+
+## 致谢
+
+本项目为独立实现；结构与验证思路受到 `math-skill`、[landau-mode](https://github.com/shaevitz/landau-mode)、[ScienceClaw physics-solver](https://github.com/beita6969/ScienceClaw)、[xiaozhi-skills](https://github.com/qizhitang/xiaozhi-skills)、[Agent Almanac](https://github.com/pjt222/agent-almanac) 与 [Electromagnetism (LobeHub)](https://lobehub.com/skills/tibsfox-gsd-skill-creator-electromagnetism) 启发。上游许可证与隔离说明见 [NOTICE](NOTICE)。

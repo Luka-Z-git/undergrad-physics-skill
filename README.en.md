@@ -1,208 +1,154 @@
 # undergrad-physics-skill
 
+[![validate](https://github.com/Luka-Z-git/undergrad-physics-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/Luka-Z-git/undergrad-physics-skill/actions/workflows/validate.yml)
 ![License](https://img.shields.io/badge/License-MIT%20%2B%20CC%20BY%204.0-orange)
 ![Examples](https://img.shields.io/badge/examples-20-blue)
-![Tests](https://img.shields.io/badge/tests-18-blue)
 
-A Codex/Claude skill for solving undergraduate physics problems with
-step-by-step derivations, built-in verification, Chinese explanations, and
-LaTeX-ready output.
+> **Not another physics solver — a verification-and-repair layer for AI-generated undergraduate physics solutions.**
 
-Current coverage: theoretical mechanics, electromagnetism, and basic
-quantum mechanics.
+The most dangerous AI physics answers are not obvious nonsense. They are plausible derivations with a wrong sign, unit, boundary condition, limit, conservation law, or normalization. This skill requires Codex and Claude to provide re-checkable physical evidence before presenting a final answer.
 
-A quick-start demo is available in [docs/QUICKSTART_DEMO.md](docs/QUICKSTART_DEMO.md).
+[中文](README.md) · [Try it in 60 seconds](#try-it-in-60-seconds) · [Full demo](docs/QUICKSTART_DEMO.md) · [How it works](SKILL.en.md)
 
-## Features
+## Four reliability principles
 
-- **Zero hard dependencies**: pure Markdown skill; verification is executed
-  by reasoning by default. Optional Python/SymPy cross-checks can
-  auto-upgrade on complex problems when available.
-- **Step-by-step workflow**: Parse -> Model -> Derive -> Verify -> Review
-  (optional) -> Answer.
-- **Built-in verification**: 8 methods (F dimensional analysis / D domain /
-  B back-substitution / C conservation / L limiting cases / E numerical
-  sampling / I independent method / J consistency). Template A normally uses
-  F + B plus one independent check; domain-mandatory J checks cannot be
-  skipped. Each PASS must include a re-checkable step; failures trigger the
-  backtrack protocol.
-- **Chinese + LaTeX**: display formulas use `$$ ... $$`; request LaTeX
-  document mode when a compilable Overleaf document is needed.
-- **Optional enhancements**: `math-skill` for linear algebra, and
-  Python/SymPy/SciPy recipes for L2–L3 machine cross-checks. None are required.
-- **Optional review engine**: pathology filter and blank-paper restart for
-  high-confidence requests.
-- **Optional student diagnosis mode**: checks a student's work, directly
-  points out missing pieces and errors, maps them to physics
-  misconceptions, and asks a confirmation question. It never expands to a
-  full Template A answer on its own.
+- **No evidence, no PASS:** every PASS must sit next to a check the reader can reproduce.
+- **Fail visibly, repair explicitly:** mark contradictions as FAIL, locate the error, return to the last reliable step, repair it, and verify again.
+- **Tools must be real:** never claim a Python or SymPy check unless it actually ran; disclose a hand-check fallback when tools are unavailable.
+- **Physics-aware verification:** select a minimum sufficient set of unit, substitution, boundary, limiting-case, conservation, or normalization checks for the problem at hand.
 
-## Install
+## See it catch an error
 
-- **Codex**: copy the repository to
-  `~/.codex/skills/undergrad-physics-skill/`.
-- **Claude Code**: copy the repository to
-  `~/.claude/skills/undergrad-physics-skill/`.
+The following is a **worked demonstration of the backtrack protocol** from this repository. It shows the behavior the skill requires; it is not a model A/B benchmark.
 
-## Triggers
+A block of mass $m$ slides a distance $s$ down a rough incline. A plausible first attempt applies mechanical-energy conservation directly:
 
-Ask a physics problem directly, for example:
+$$
+\frac12mv^2=mgs\sin\alpha
+\quad\Rightarrow\quad
+v_{\rm wrong}=\sqrt{2gs\sin\alpha}.
+$$
 
-- "Use the Lagrangian method to derive the equations of motion of a double pendulum."
-- "Derive the cyclotron motion of a charged particle in a uniform magnetic field."
-- "Solve the stationary Schrödinger equation for a one-dimensional infinite square well and verify normalization."
-- "Check my work: is this step correct?" (enters student diagnosis mode)
+**Check → FAIL:** kinetic friction does work $W_f=-\mu mg\cos\alpha\,s\neq0$, so mechanical energy is not conserved. The derivation omitted dissipation and cannot pass the conservation check.
 
-Matrix, eigenvalue, matrix-power, and recurrence subproblems may optionally
-use `math-skill`; without it, use the J consistency checks by hand.
+**Locate and repair:** return to the model and use the work-energy theorem:
+
+$$
+(mg\sin\alpha-\mu mg\cos\alpha)s=\frac12mv^2,
+$$
+
+which gives
+
+$$
+v=\sqrt{2gs(\sin\alpha-\mu\cos\alpha)}.
+$$
+
+**Re-check → PASS:** Newton's second law gives $a=g(\sin\alpha-\mu\cos\alpha)$, and $v^2=2as$ produces the same result. The expression also recovers the frictionless limit as $\mu\to0$.
+
+[Read the complete FAIL → locate → repair → re-verify example](examples/backtrack_demonstration.md)
+
+## Try it in 60 seconds
+
+### 1. Install
+
+Codex on PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills" | Out-Null
+git clone https://github.com/Luka-Z-git/undergrad-physics-skill.git "$env:USERPROFILE\.codex\skills\undergrad-physics-skill"
+```
+
+Codex on macOS or Linux:
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/Luka-Z-git/undergrad-physics-skill.git ~/.codex/skills/undergrad-physics-skill
+```
+
+For Claude Code, use the same repository contents and change the target to `~/.claude/skills/undergrad-physics-skill/`. Codex is the primary verified platform. The file layout is compatible with Claude Code, but it has not received the same breadth of behavioral regression testing.
+
+### 2. Ask
+
+Copy this diagnostic prompt:
+
+> For a block sliding down a rough incline, I wrote $\frac12mv^2=mgs\sin\alpha$. Check this step. Do not silently replace my answer; if a check fails, show the evidence, locate the error, repair it, and verify again.
+
+Or try:
+
+- “Derive the simple-pendulum equation with the Lagrangian method, then check units, substitute back into the Euler–Lagrange equation, and take the small-angle limit.”
+- “Solve the one-dimensional infinite square well and verify both boundary conditions and normalization.”
+- “Check my RC-discharge derivation. Identify only the first physical error instead of re-solving the entire problem.”
+
+### 3. Know that it is working
+
+You should see:
+
+- an actual substitution, unit calculation, limit, or conservation relation—not merely “the result was verified”;
+- evidence next to every PASS;
+- an explicit “FAIL → locate → repair → re-verify” sequence when a check fails, rather than a silently replaced answer.
+
+If you only receive a generic solution, name `undergrad-physics-skill` explicitly in your prompt and confirm that the repository's root `SKILL.md` is inside the skill directory shown above.
+
+## Why it exists
+
+| Common failure mode | What this skill does |
+|---|---|
+| A fluent derivation has a sign or dimensional error | Shows an actual dimensional check or substitution into the original equation |
+| A solution satisfies the equation but ignores initial or boundary conditions | Verifies the problem constraints, not algebra alone |
+| The answer says “verified” without showing a check | Refuses to mark PASS without re-checkable evidence |
+| A contradiction is discovered and the answer is quietly replaced | Preserves the FAIL, locates the first bad step, repairs it, and verifies again |
+| Python or SymPy is claimed without being run | Reports only real tool results; otherwise discloses a hand-check fallback |
+| A student asks where one step went wrong and receives a full replacement solution | Enters diagnosis mode and identifies the first error and its underlying misconception |
+
+## Current evidence and limitations
+
+The repository currently provides **reviewable design constraints, worked demonstrations, and deterministic tests**:
+
+- 20 verified worked examples, including boundary cases, degeneracies, student diagnosis, and a failure-repair demonstration;
+- 12 adversarial behavior cases covering unsupported PASS claims, missed boundaries, false conservation in dissipative systems, and fabricated tool verification;
+- zero-dependency structural gates, numerical regression, and size budgets in GitHub Actions;
+- equivalent Chinese and English modules with explicit out-of-scope behavior.
+
+**A model A/B benchmark is not yet complete.** Until same-model, same-problem, same-setting results are public, this project does not claim a measured accuracy improvement. The planned benchmark will report final-answer accuracy, key-derivation accuracy, undetected contradictions, unsupported PASS claims, and output-length/latency cost. See the [v1.0 improvement plan](docs/V1_IMPROVEMENT_PLAN.md).
 
 ## Scope
 
-**Covers**: theoretical mechanics (Newtonian/Lagrangian/Hamiltonian, small
-oscillations, rigid bodies, non-inertial frames), electromagnetism
-(electrostatics, magnetostatics, circuits, Maxwell basics, linear-media
-boundary conditions), and basic quantum mechanics (stationary Schrodinger
-equation, operators, commutators, one-dimensional systems,
-non-degenerate perturbation theory and spin-1/2 basics).
+Currently covered:
 
-**Out of scope**: other undergraduate topics (thermodynamics, statistical
-physics, optics/waves, special relativity — currently on the roadmap),
-graduate courses, research workflows, lab-only content, and computational
-physics programming.
+- **Theoretical mechanics:** Newtonian, Lagrangian, and Hamiltonian mechanics; constraints; small oscillations; rigid-body basics; non-inertial frames.
+- **Electromagnetism:** electrostatics, magnetostatics, circuits, basic Maxwell equations, and linear-media boundary conditions.
+- **Basic quantum mechanics:** the stationary Schrödinger equation, one-dimensional systems, operators and commutators, introductory perturbation theory, and spin 1/2.
 
-## Verification Engine (Summary)
+Currently out of scope: thermodynamics, statistical physics, optics/waves, special relativity, graduate courses, research workflows, laboratory-only work, and computational-physics programming. The skill declares these boundaries instead of pretending they are covered.
 
-| Code | Method | Purpose |
-|---|---|---|
-| F | Dimensional analysis | Always check units and final dimensions |
-| D | Domain/parameter domain | Physical ranges, denominators, real roots |
-| B | Back-substitution | Substitute the solution back into the original equation |
-| C | Conservation law | Energy/momentum/angular momentum when applicable |
-| L | Limiting case | Parameter limits must reproduce known results |
-| E | Numerical sampling | Substitute concrete values and compare both sides |
-| I | Independent method | Re-solve with a second framework |
-| J | Consistency | Matrix identities, normalization, commutators |
+## How it works
 
-Hard rules: Template A uses a minimum sufficient verification set—normally
-F + B plus one independent check—and every N/A must have a physical reason.
-Any FAIL triggers the backtrack protocol; after two failed corrections,
-switch to an independent route or explicitly state that no verified answer
-can be given. The authoritative definitions live in
-`modules/verification_engine.md`.
+A full solution follows `Parse → Model → Derive → Verify → optional Review → Answer`. Result-only requests, conceptual questions, and student diagnosis take shorter dedicated paths. A standard full solution normally checks dimensions and substitution plus one problem-specific independent test. Every non-applicable check requires a physical reason.
 
-## Coverage and Roadmap
+- [SKILL.en.md](SKILL.en.md): entry routing, core workflow, and module index;
+- [Verification engine](modules/en/verification_engine.md): check selection, PASS/FAIL evidence, and backtracking;
+- [Student diagnosis](modules/en/tutoring_mode.md): reviews student work without automatically revealing a full replacement solution;
+- [Example index](examples/INDEX.md): routes problem types to complete examples;
+- [Contributing guide](CONTRIBUTING.md): standards for new examples, modules, and tests.
 
-Current coverage: classical mechanics, electromagnetism, and basic quantum
-mechanics.
+## Release status
 
-Planned undergraduate areas (not yet covered):
+- [x] v0.1–v0.5.2: three domains, verification engine, diagnosis mode, examples, structural validation, and dual licensing;
+- [x] v0.7: minimum sufficient verification, entry routing, LaTeX document mode, adversarial cases, and numerical regression;
+- [x] v0.8: L1–L4 tool gate and undergraduate-coverage roadmap—**feature-complete; formal tag and GitHub Release pending**;
+- [ ] v1.0: a public and reproducible physics-solving A/B benchmark.
 
-- [ ] Thermodynamics
-- [ ] Statistical physics
-- [ ] Optics / waves
-- [ ] Special relativity
+## License and feedback
 
-Until these are added, "undergrad physics" describes the target positioning,
-not the full covered set; out-of-scope problems are declared before solving.
+Scripts are licensed under MIT OR Apache-2.0. Module, example, and test prose is licensed under [CC BY 4.0](LICENSE-CC-BY), including commercial use with attribution and a license link. See [NOTICE](NOTICE) for details.
 
-## Tool Gate
+Found a problem? Open a:
 
-- L1 simple problems: hand calculation only; external tools are forbidden
-- L2 medium problems: one symbolic cross-check allowed when available
-- L3 complex problems: auto-upgrade to one symbolic/numerical check when available
-- L4 high-confidence/review: independent P1–P5 review
+- [Wrong-answer report](.github/ISSUE_TEMPLATE/wrong_answer.md) for incorrect solutions, unsupported PASS claims, missed verification, or tool-claim problems;
+- [New-example proposal](.github/ISSUE_TEMPLATE/new_example.md) for uncovered problem types or real failures worth preserving as regressions.
 
-Tool claims must come from real execution; never claim "verified" unless a
-tool actually ran.
-
-## Repository Layout
-
-```
-undergrad-physics-skill/
-|-- SKILL.md
-|-- modules/
-|   |-- mechanics.md
-|   |-- electromagnetism.md
-|   |-- quantum_basics.md
-|   |-- verification_engine.md
-|   |-- review_engine.md
-|   |-- tutoring_mode.md
-|   |-- output_templates.md
-|   |-- error_prevention.md
-|   |-- computation.md
-|   `-- en/
-|-- docs/
-|-- examples/
-|-- tests/
-|-- CONTRIBUTING.md
-|-- CHANGELOG.md
-|-- NOTICE
-|-- LICENSE
-|-- LICENSE-APACHE
-`-- LICENSE-CC-BY
-```
-
-## Development Status
-
-- [x] v0.1: theoretical mechanics
-- [x] v0.2: electromagnetism
-- [x] v0.3: basic quantum mechanics
-- [x] v0.4: optional student diagnosis mode (non-primary)
-- [x] v0.5: production hardening — scope boundaries, difficulty grading,
-  cost stop-loss in the backtrack protocol, confirmation-question standards
-- [x] v0.5.1: slimming — cross-domain trap-table dedup, README/test-case
-  compaction
-- [x] v0.5.2: review fixes — J numbering as ⑦, step references, Faraday
-  pointer, scope alignment, structural validator, license verification
-- [x] v0.7: minimum sufficient verification, entry routing, LaTeX document mode, example index, adversarial cases and spot-check; includes all v0.6 P0/P1 work
-- [ ] v0.8: L1–L4 tool gate; coverage roadmap for thermodynamics, statistical physics, optics/waves, and special relativity
-- [ ] v1.0: formal release
-
-## License
-
-Dual-licensed: scripts (e.g. `tests/validate_structure.py`) are MIT OR
-Apache-2.0 (see [LICENSE](LICENSE) and [LICENSE-APACHE](LICENSE-APACHE));
-module text, examples, and tests are
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (see
-[LICENSE-CC-BY](LICENSE-CC-BY)). See [NOTICE](NOTICE).
-
-Commercial use is allowed under CC BY 4.0 with attribution; this choice
-maximizes reuse. Publishing this repository constitutes public disclosure
-(prior art); scripts used under Apache-2.0 carry the standard patent grant
-and termination clause; the authors do not assert patents over the methods
-described here.
-
-**Attribution**: when reusing or adapting prose, include: `Text content:
-undergrad-physics-skill contributors, licensed under CC BY 4.0
-(https://creativecommons.org/licenses/by/4.0/). If modified, indicate
-changes.`
-
-## Reporting Issues
-
-Found a wrong answer, skipped verification, or a formatting problem? Open an issue:
-
-- [Wrong answer report](.github/ISSUE_TEMPLATE/wrong_answer.md): report errors, fake PASS, or missing checks
-- [New example proposal](.github/ISSUE_TEMPLATE/new_example.md): propose examples for uncovered topics
-
-Include the problem statement, the skill output, and your own derivation when possible.
-
-## Originality
-
-The text, examples, and tests in this repository are original. The project
-only borrows methodology and structure from the projects listed in NOTICE,
-without copying their source text.
+If this skill catches a physics error you would otherwise have missed, consider starring the repository—or contribute the problem as a new regression case.
 
 ## Credits
 
-- `math-skill` - optional mathematical-reasoning collaboration skill; use J
-  consistency checks by hand when it is unavailable
-- [landau-mode](https://github.com/shaevitz/landau-mode) - pathology filter
-  and blank-paper restart methodology
-- [ScienceClaw physics-solver](https://github.com/beita6969/ScienceClaw) -
-  symbolic computation recipe ideas
-- [xiaozhi-skills](https://github.com/qizhitang/xiaozhi-skills) - Chinese
-  physics problem-solving picture/modeling ideas
-- [Agent Almanac](https://github.com/pjt222/agent-almanac) - stepwise
-  protocols for electromagnetic induction and magnetic field analysis
-- [Electromagnetism (LobeHub)](https://lobehub.com/skills/tibsfox-gsd-skill-creator-electromagnetism) -
-  formula and pitfall reference structure
+This project is an independent implementation. Its structure and verification ideas were informed by `math-skill`, [landau-mode](https://github.com/shaevitz/landau-mode), [ScienceClaw physics-solver](https://github.com/beita6969/ScienceClaw), [xiaozhi-skills](https://github.com/qizhitang/xiaozhi-skills), [Agent Almanac](https://github.com/pjt222/agent-almanac), and [Electromagnetism (LobeHub)](https://lobehub.com/skills/tibsfox-gsd-skill-creator-electromagnetism). See [NOTICE](NOTICE) for upstream licensing and isolation notes.
